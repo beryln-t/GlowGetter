@@ -19,7 +19,7 @@ const reviewSchema = new Schema(
 
 const productSchema = new Schema(
   {
-    name: { type: String, required: true, unique: true, trim: true },
+    productName: { type: String, required: true, unique: true, trim: true },
     imgurl: { type: String, required: true },
     price: { type: Number, required: true, min: 1 },
     description: { type: String, required: true },
@@ -29,7 +29,7 @@ const productSchema = new Schema(
       enum: ["Cleanser", "Moisturiser", "Sunscreen"],
       required: true,
     },
-    skintype: [{ type: Schema.Types.ObjectId, ref: "Skintype" }],
+    skintypes: [{ type: Schema.Types.ObjectId, ref: "Skintype" }],
     stockists: [{ type: Schema.Types.ObjectId, ref: "Stockist", unique: true }],
     reviews: [reviewSchema],
   },
