@@ -29,7 +29,7 @@ export default function NavBar() {
               <a>Home</a>
             </li>
             <li>
-              <a className="justify-between"> Skin Type Analyzer</a>
+              <a className="justify-between"> Skin Type Analyser</a>
             </li>
             <li>
               <a>Browse Products</a>
@@ -44,7 +44,7 @@ export default function NavBar() {
             <a>Home</a>
           </li>
           <li tabIndex={0}>
-            <a>Skin Type Analyzer</a>
+            <a>Skin Type Analyser</a>
           </li>
           <li>
             <a>Browse Products</a>

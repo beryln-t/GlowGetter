@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const analyzerSchema = new Schema({
+const analyserSchema = new Schema({
   question: { type: String, required: true, trim: true, unique: true },
   yesScore: {
     type: Number,
@@ -27,5 +27,5 @@ const analyzerSchema = new Schema({
   },
 });
 
-const Analyzer = mongoose.model("Analyzer", analyzerSchema);
-module.exports = Analyzer;
+const Analyser = mongoose.model("Analyser", analyserSchema);
+module.exports = Analyser;

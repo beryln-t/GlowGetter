@@ -25,11 +25,11 @@ const userSchema = new Schema(
       enum: ["member", "admin"],
     },
     wishlist: [{ type: Schema.Types.ObjectId, ref: "Product", unique: true }],
-    analyzerResponse: [
+    analyserResponse: [
       {
         question: {
           type: Schema.Types.ObjectId,
-          ref: "Analyzer",
+          ref: "Analyser",
         },
         answer: {
           type: String,
@@ -38,7 +38,7 @@ const userSchema = new Schema(
         },
       },
     ],
-    analyzerScore: {
+    analyserScore: {
       type: Number,
       min: 0,
       max: 10,
