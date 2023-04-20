@@ -12,21 +12,13 @@ export default function Register() {
                 <label className="label">
                   <span className="label-text">Name</span>
                 </label>
-                <input
-                  type="text"
-                  placeholder="Name"
-                  className="input input-bordered"
-                />
+                <input type="text" className="input input-bordered" />
               </div>
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Email</span>
                 </label>
-                <input
-                  type="text"
-                  placeholder="email"
-                  className="input input-bordered"
-                />
+                <input type="text" className="input input-bordered" />
               </div>
               <div className="form-control">
                 <label className="label">
@@ -34,11 +26,25 @@ export default function Register() {
                     Password (4 or more characters)
                   </span>
                 </label>
-                <input
-                  type="text"
-                  placeholder="password"
-                  className="input input-bordered"
-                />
+                <input type="text" className="input input-bordered" />
+              </div>
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Confirm Password</span>
+                </label>
+                <input type="text" className="input input-bordered" />
+              </div>
+              <div className="form-control w-full max-w-xs">
+                <label className="label">
+                  <span className="label-text">Account Type</span>
+                </label>
+                <select className="select select-bordered">
+                  <option disabled selected>
+                    Select an option
+                  </option>
+                  <option>Member</option>
+                  <option>Admin</option>
+                </select>
               </div>
 
               <div className="form-control mt-6">
