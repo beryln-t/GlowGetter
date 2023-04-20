@@ -1,6 +1,7 @@
 import { useState } from "react";
-import NavBar from "./components/NavBar/NavBar";
 import "./App.css";
+import NavBar from "./components/NavBar/NavBar";
+import Register from "./pages/Register/Register";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -8,6 +9,7 @@ function App() {
   return (
     <div className="App">
       <NavBar />
+      <Register />
     </div>
   );
 }
