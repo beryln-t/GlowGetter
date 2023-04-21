@@ -1,8 +1,14 @@
+import React, { useEffect } from "react";
 import { Link, useNavigate, NavLink } from "react-router-dom";
 import PreSignInNB from "./PreSignInNB";
 import PostSignInNbMem from "./PostSignInNbMem";
+import PostSignInNbAdmin from "./PostSignInNbAdmin";
+import PostSignInNB from "./PostSignInNB";
 
-export default function NavBar() {
+export default function NavBar({ user, setUser }) {
+  console.log(user);
+  const navigate = useNavigate();
+
   return (
     <div className="navbar sticky top-0 z-50 bg-neutral-content">
       <div className="navbar-start">
@@ -28,7 +34,7 @@ export default function NavBar() {
             className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
           >
             <li>
-              <a>Home</a>
+              <NavLink to="/">Home</NavLink>
             </li>
             <li>
               <a className="justify-between"> Skin Type Analyser</a>
@@ -43,7 +49,7 @@ export default function NavBar() {
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
           <li>
-            <a>Home</a>
+            <NavLink to="/">Home</NavLink>
           </li>
           <li tabIndex={0}>
             <a>Skin Type Analyser</a>
@@ -53,7 +59,7 @@ export default function NavBar() {
           </li>
         </ul>
       </div>
-      <PreSignInNB />
+      {user ? <PostSignInNB user={user} setUser={setUser} /> : <PreSignInNB />}
     </div>
   );
 }

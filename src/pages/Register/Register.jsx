@@ -1,37 +1,35 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { signUp } from "../../utilities/users-service";
+import { getUser, signUp } from "../../utilities/users-service";
 import { Link } from "react-router-dom";
 
-export default function Register() {
+export default function Registe({ setUser }) {
   const [state, setState] = useState({
     name: "",
     email: "",
     password: "",
     confirm: "",
+    role: "",
   });
-  const disable = state.password !== state.confirm;
+
   const navigate = useNavigate();
   const [error, setError] = useState("");
+
+  const isFormFilled = Object.values(state).every((val) => val !== "");
+  const disable = state.password !== state.confirm || !isFormFilled;
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch("/api/users/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(state),
-      });
-      const data = await response.json();
-      if (response.ok) {
-        navigate("/users/signin");
-      } else {
-        setError(data.error);
-      }
+      await signUp(state);
+      setUser(getUser());
+      navigate("/users/signin");
     } catch (error) {
-      setError(error.message);
+      if (error.message.includes("email")) {
+        setError("This email already has an account");
+      } else {
+        setError(error.message);
+      }
     }
   };
 
@@ -119,7 +117,6 @@ export default function Register() {
                     className="select select-bordered"
                     defaultValue=""
                     onChange={handleChange}
-                    value={state.role}
                   >
                     <option hidden value="">
                       Select an option

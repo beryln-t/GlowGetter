@@ -6,22 +6,27 @@ const yup = require("yup");
 
 const create = async (req, res) => {
   const { password, name, email, role } = req.body;
-  if (password.length < 3) {
-    return res.status(400).json({ error: "your password is too short" });
+  if (password.length < 4) {
+    return res.status(400).json({ error: "Your password is too short" });
   }
   if (password.length > 30) {
-    return res.status(400).json({ error: "your password is too long" });
+    return res.status(400).json({
+      error:
+        "Your password is too long. Please keep password under 30 Characters.",
+    });
   }
   if (name.length > 100) {
-    return res.status(400).json({ error: "your name is too long" });
+    return res.status(400).json({
+      error: "Your name is too long. Please Keep name under 100 characters",
+    });
   }
   try {
     const user = await User.create(req.body);
-    const payload = { user };
+    const payload = { name, email, password, role };
     const token = jwt.sign(payload, JWT_SECRET, { expiresIn: 60 * 600 });
     res.status(201).json(token);
   } catch (error) {
-    console.log("fucking shit", error);
+    console.log("the error fuck", error);
     res.status(500).json(error);
   }
 };
