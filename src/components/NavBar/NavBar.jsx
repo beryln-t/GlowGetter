@@ -1,8 +1,6 @@
 import React, { useEffect } from "react";
 import { Link, useNavigate, NavLink } from "react-router-dom";
 import PreSignInNB from "./PreSignInNB";
-import PostSignInNbMem from "./PostSignInNbMem";
-import PostSignInNbAdmin from "./PostSignInNbAdmin";
 import PostSignInNB from "./PostSignInNB";
 
 export default function NavBar({ user, setUser }) {
