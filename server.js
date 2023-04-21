@@ -13,6 +13,7 @@ const port = process.env.PORT || 3000;
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "dist")));
+app.use(require("./config/checkToken"));
 
 app.use("/api/users", userRouter);
 

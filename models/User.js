@@ -26,7 +26,7 @@ const userSchema = new Schema(
       required: true,
       enum: ["Member", "Admin"],
     },
-    wishlist: [{ type: Schema.Types.ObjectId, ref: "Product" }],
+    apple: [{ type: Schema.Types.ObjectId, ref: "Product" }],
     analyserResponse: [
       {
         question: {
