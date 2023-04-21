@@ -1,31 +1,38 @@
 import { useState } from "react";
-import { getUser, login } from "../../utilities/users-service";
 import { useNavigate } from "react-router-dom";
+import { getUser, login } from "../../utilities/users-service";
+import { Link } from "react-router-dom";
+import { useFormik } from "formik";
+import * as yup from "yup";
+
+const validationSchema = yup.object({
+  email: yup
+    .string()
+    .email("Please enter a valid email")
+    .required("Email is required"),
+  password: yup.string().required("Password is required"),
+});
 
 export default function SignIn({ setUser }) {
-  const [credentials, setCredentials] = useState({
-    email: "",
-    password: "",
-  });
-
-  const [error, setError] = useState("");
   const navigate = useNavigate();
+  const [error, setError] = useState("");
 
-  function handleChange(evt) {
-    setCredentials({ ...credentials, [evt.target.name]: evt.target.value });
-    setError("");
-  }
-
-  const handleSubmit = async (evt) => {
-    evt.preventDefault();
-    try {
-      const user = await login(credentials);
-      setUser(getUser());
-      navigate("/");
-    } catch {
-      setError("Login failed. Try again.");
-    }
-  };
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    validationSchema: validationSchema,
+    onSubmit: async (values) => {
+      try {
+        const user = await login(values);
+        setUser(getUser());
+        navigate("/");
+      } catch {
+        setError("Login failed. Try again.");
+      }
+    },
+  });
 
   return (
     <div>
@@ -40,7 +47,7 @@ export default function SignIn({ setUser }) {
           <div className="text-center">
             <h1 className="text-5xl font-bold text-white mb-4">Sign in now!</h1>
           </div>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={formik.handleSubmit}>
             <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
               <div className="card-body">
                 <div className="form-control">
@@ -51,9 +58,13 @@ export default function SignIn({ setUser }) {
                     type="text"
                     className="input input-bordered"
                     name="email"
-                    value={credentials.email}
-                    onChange={handleChange}
+                    value={formik.values.email}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
                   />
+                  {formik.touched.email && formik.errors.email ? (
+                    <div className="text-red-500">{formik.errors.email}</div>
+                  ) : null}
                 </div>
                 <div className="form-control">
                   <label className="label">
@@ -63,9 +74,13 @@ export default function SignIn({ setUser }) {
                     type="password"
                     className="input input-bordered"
                     name="password"
-                    value={credentials.password}
-                    onChange={handleChange}
+                    value={formik.values.password}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
                   />
+                  {formik.touched.password && formik.errors.password ? (
+                    <div className="text-red-500">{formik.errors.password}</div>
+                  ) : null}
                 </div>
                 {error && <p className="text-red-500">{error}</p>}
                 <div className="form-control mt-6">
@@ -75,12 +90,9 @@ export default function SignIn({ setUser }) {
                 </div>
                 <div className="divider text-xs">OR</div>
                 <div className="form-control mt-0">
-                  <button
-                    className="btn btn-primary"
-                    onClick={() => navigate("/users/register")}
-                  >
+                  <Link to="/users/register" className="btn btn-primary">
                     Register an Account
-                  </button>
+                  </Link>
                 </div>
               </div>
             </div>
