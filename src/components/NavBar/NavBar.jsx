@@ -35,7 +35,9 @@ export default function NavBar({ user, setUser }) {
               <NavLink to="/">Home</NavLink>
             </li>
             <li>
-              <a className="justify-between"> Skin Type Analyser</a>
+              <NavLink className="justify-between" to="/skinanalyser">
+                Skin Type Analyser
+              </NavLink>
             </li>
             <li>
               <a>Browse Products</a>
@@ -49,8 +51,8 @@ export default function NavBar({ user, setUser }) {
           <li>
             <NavLink to="/">Home</NavLink>
           </li>
-          <li tabIndex={0}>
-            <a>Skin Type Analyser</a>
+          <li>
+            <NavLink to="/skinanalyser">Skin Type Analyser</NavLink>
           </li>
           <li>
             <a>Browse Products</a>

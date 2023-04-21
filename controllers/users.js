@@ -38,6 +38,12 @@ const create = async (req, res) => {
     req.body
   );
   try {
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      res.status(409).json({ message: "Email address already taken" });
+      return;
+    }
+
     const user = await User.create(req.body);
     const payload = { name, email, password, role };
     const token = jwt.sign(payload, JWT_SECRET, { expiresIn: 60 * 600 });

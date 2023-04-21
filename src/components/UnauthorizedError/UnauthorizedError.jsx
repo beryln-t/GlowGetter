@@ -1,4 +1,4 @@
-export default function NoMatch() {
+export default function UnauthorizedError() {
   return (
     <div className="alert alert-error shadow-lg mx-auto">
       <div className="flex items-center">
@@ -16,7 +16,9 @@ export default function NoMatch() {
           />
         </svg>
         <span className="ml-2 text-center ">
-          404. That's an error! The page you are looking for does not exist.
+          401. That's an error! You are not authorized to access this resource.
+          Please provide valid credentials to authenticate yourself and try
+          again.
         </span>
       </div>
     </div>
