@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+const bcrypt = require("bcrypt");
+const SALT_ROUNDS = 10;
 
 const userSchema = new Schema(
   {
@@ -22,9 +24,9 @@ const userSchema = new Schema(
     role: {
       type: String,
       required: true,
-      enum: ["member", "admin"],
+      enum: ["Member", "Admin"],
     },
-    wishlist: [{ type: Schema.Types.ObjectId, ref: "Product", unique: true }],
+    wishlist: [{ type: Schema.Types.ObjectId, ref: "Product" }],
     analyserResponse: [
       {
         question: {
@@ -60,6 +62,12 @@ const userSchema = new Schema(
     },
   }
 );
+userSchema.pre("save", async function (next) {
+  // 'this' is the user doc
+  if (!this.isModified("password")) return next();
+  this.password = await bcrypt.hash(this.password, SALT_ROUNDS);
+  return next();
+});
 
 const User = mongoose.model("User", userSchema);
 module.exports = User;

@@ -1,4 +1,6 @@
 import { Link, useNavigate, NavLink } from "react-router-dom";
+import PreSignInNB from "./PreSignInNB";
+import PostSignInNbMem from "./PostSignInNbMem";
 
 export default function NavBar() {
   return (
@@ -51,15 +53,7 @@ export default function NavBar() {
           </li>
         </ul>
       </div>
-      <div className="navbar-end">
-        <a className="btn btn-outline btn-primary btn-xs sm:btn-sm md:btn-md">
-          Sign In
-        </a>
-        <div className="divider divider-horizontal"></div>
-        <a className="btn btn-outline btn-primary btn-xs sm:btn-sm md:btn-md">
-          Register
-        </a>
-      </div>
+      <PreSignInNB />
     </div>
   );
 }
