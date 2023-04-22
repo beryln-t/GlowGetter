@@ -1,6 +1,6 @@
 export default function UnauthorizedError() {
   return (
-    <div className="alert alert-error shadow-lg mx-auto">
+    <div className="alert alert-error shadow-lg mx-auto flex justify-center">
       <div className="flex items-center">
         <svg
           xmlns="http://www.w3.org/2000/svg"

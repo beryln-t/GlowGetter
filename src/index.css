@@ -1,3 +1,19 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
+
+.centerMenu a.active {
+  background-color: transparent;
+  text-decoration: underline;
+  color: black;
+}
+
+.centerMenu a:active {
+  background-color: transparent;
+  color: black;
+}
+
+.centerMenu a:hover {
+  text-decoration: underline;
+  background-color: transparent;
+}

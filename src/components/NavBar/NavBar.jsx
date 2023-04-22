@@ -1,11 +1,10 @@
-import React, { useEffect } from "react";
-import { Link, useNavigate, NavLink } from "react-router-dom";
+import React from "react";
+import { NavLink } from "react-router-dom";
 import PreSignInNB from "./PreSignInNB";
 import PostSignInNB from "./PostSignInNB";
 
 export default function NavBar({ user, setUser }) {
   console.log(user);
-  const navigate = useNavigate();
 
   return (
     <div className="navbar sticky top-0 z-50 bg-neutral-content">
@@ -44,9 +43,9 @@ export default function NavBar({ user, setUser }) {
             </li>
           </ul>
         </div>
-        <a className="btn btn-ghost normal-case text-xl">GlowGetter</a>
+        <p className="text text-xl font-black	font-serif ml-20">GlowGetter</p>
       </div>
-      <div className="navbar-center hidden lg:flex">
+      <div className="centerMenu navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
           <li>
             <NavLink to="/">Home</NavLink>

@@ -1,6 +1,6 @@
 export default function NoMatch() {
   return (
-    <div className="alert alert-error shadow-lg mx-auto">
+    <div className="alert alert-error shadow-lg mx-auto flex justify-center transition">
       <div className="flex items-center">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -15,7 +15,7 @@ export default function NoMatch() {
             d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
           />
         </svg>
-        <span className="ml-2 text-center ">
+        <span className="ml-2 text-center">
           404. That's an error! The page you are looking for does not exist.
         </span>
       </div>

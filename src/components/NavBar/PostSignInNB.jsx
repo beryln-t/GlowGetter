@@ -2,6 +2,7 @@ import React from "react";
 import { FiChevronDown } from "react-icons/fi";
 import { logOut } from "../../utilities/users-service";
 import { useNavigate } from "react-router-dom";
+import { CustomEvents } from "../../utilities/CustomEvents";
 
 export default function PostSignInNB({ user, setUser }) {
   const navigate = useNavigate();
@@ -10,10 +11,11 @@ export default function PostSignInNB({ user, setUser }) {
     e.preventDefault();
     logOut();
     setUser(null);
+    document.dispatchEvent(new CustomEvent(CustomEvents.ShowLogoutAlert));
     navigate("/");
   };
   return (
-    <div className="navbar-end">
+    <div className="navbar-end mr-20	">
       <div className="flex items-stretch">
         <div className="dropdown dropdown-end">
           <label tabIndex={0} className="btn btn-ghost rounded-btn ">
