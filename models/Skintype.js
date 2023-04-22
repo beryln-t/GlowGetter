@@ -4,14 +4,16 @@ const Schema = mongoose.Schema;
 const skintypeSchema = new Schema({
   type: {
     type: String,
-    required: true,
-    unique: true,
     trim: true,
     enum: ["Oily", "Normal", "Dry"],
   },
+  img: { type: String },
+  message: {
+    type: String,
+    trim: true,
+  },
   minScore: {
     type: Number,
-    required: true,
     min: 0,
     max: 10,
     validate: {
@@ -21,7 +23,6 @@ const skintypeSchema = new Schema({
   },
   maxScore: {
     type: Number,
-    required: true,
     min: 0,
     max: 10,
     validate: {

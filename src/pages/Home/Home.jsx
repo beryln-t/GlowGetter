@@ -12,11 +12,11 @@ export default function Home() {
           <h1 className="mb-5 text-5xl font-bold"> Welcome to GlowGetter!</h1>
           <p className="mb-5 text-lg">
             Achieving glowy skin starts with using the right products for your
-            skin type! Take our Skin Type Analyzer quiz today to get
-            personalised product recommendations!
+            skin type. Our Skin Type Analyser helps you determine your skin
+            type, to provide you with personalised product recommendations!
           </p>
           <button className="btn btn-primary">
-            Take the Skin Type Analyser Quiz!
+            Try the Skin Type Analyser
           </button>
         </div>
       </div>
