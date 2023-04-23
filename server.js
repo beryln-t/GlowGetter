@@ -8,6 +8,7 @@ require("./config/database");
 //define routes
 const userRouter = require("./routes/users");
 const analyserRouter = require("./routes/analyser");
+const skintypeRouter = require("./routes/skintypes");
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -17,9 +18,10 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, "dist")));
 app.use(require("./config/checkToken"));
 
-//use routs
+//use routes
 app.use("/api/users", userRouter);
-app.use("/api/analyser", userRouter);
+app.use("/api/analyser", analyserRouter);
+app.use("/api/skintypes", skintypeRouter);
 
 app.get("/", function (req, res) {
   res.sendFile(path.join(__dirname, "dist", "index.html"));

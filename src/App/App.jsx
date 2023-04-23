@@ -11,12 +11,11 @@ import Home from "../pages/Home/Home";
 import SignIn from "../pages/SignIn/SignIn";
 import SkinAnalyser from "../pages/SkinAnalyser/SkinAnalyser";
 
-//error message components
-// import NoMatch from "../components/NoMatch/NoMatch";
+// error message components
+import NoMatch from "../components/NoMatch/NoMatch";
 
 //others
 import { CustomEvents } from "../utilities/CustomEvents";
-import NoMatch from "../components/NoMatch/NoMatch";
 import Register from "../pages/Register/Register";
 
 export default function App() {
@@ -29,7 +28,6 @@ export default function App() {
   };
 
   useEffect(() => {
-    onShowLogoutAlert();
     document.addEventListener(CustomEvents.ShowLogoutAlert, onShowLogoutAlert);
     return () =>
       document.removeEventListener(

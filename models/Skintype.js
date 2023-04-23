@@ -7,7 +7,6 @@ const skintypeSchema = new Schema({
     trim: true,
     enum: ["Oily", "Normal", "Dry"],
   },
-  img: { type: String },
   message: {
     type: String,
     trim: true,
@@ -33,3 +32,4 @@ const skintypeSchema = new Schema({
 });
 
 const Skintype = mongoose.model("Skintype", skintypeSchema);
+module.exports = Skintype;

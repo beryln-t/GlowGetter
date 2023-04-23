@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 // @ts-ignore
-import HomePageBG from "../../../public/HomePageBG.jpg";
+import HomePageBG from "../../components/HomePageBG/HomePageBG.jpg";
 
 export default function Home() {
   const [loaded, setLoaded] = useState(false);

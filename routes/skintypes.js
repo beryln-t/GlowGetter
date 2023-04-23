@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const analyserCtrl = require("../controllers/analyser");
+const skintypeCtrl = require("../controllers/skintypes");
 
-router.get("/", analyserCtrl.showQns);
+router.get("/", skintypeCtrl.showST);
 
 module.exports = router;
