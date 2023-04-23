@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 // @ts-ignore
 import HomePageBG from "../../components/HomePageBG/HomePageBG.jpg";
+import { Link } from "react-router-dom";
 
 export default function Home() {
   const [loaded, setLoaded] = useState(false);
@@ -28,7 +29,7 @@ export default function Home() {
           style={{ display: "none" }}
         />
         <div className="hero-overlay bg-opacity-50"></div>
-        <div className="hero-content text-center text-neutral-content">
+        <div className="hero-content text-center text-neutral-content ">
           <div className="max-w-lg">
             <h1 className="mb-5 text-5xl font-bold"> Welcome to GlowGetter!</h1>
             <p className="mb-5 text-lg">
@@ -36,9 +37,9 @@ export default function Home() {
               skin type. Our Skin Type Analyser helps you determine your skin
               type, to provide you with personalised product recommendations!
             </p>
-            <button className="btn btn-primary">
+            <Link to="/skinanalyser" className="btn btn-primary">
               Try the Skin Type Analyser
-            </button>
+            </Link>
           </div>
         </div>
       </div>

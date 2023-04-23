@@ -36,7 +36,7 @@ const userSchema = new Schema(
         answer: {
           type: String,
           required: true,
-          enum: ["Yes", "No"],
+          enum: ["0", "1"],
         },
       },
     ],

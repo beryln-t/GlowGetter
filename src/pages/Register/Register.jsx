@@ -86,18 +86,20 @@ export default function Register({ user, setUser }) {
               Register an Account!
             </h1>
           </div>
-          <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+          <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100 ">
             <div className="card-body">
               <form onSubmit={handleSubmit}>
                 <div className="form-control">
                   <label className="label">
-                    <span className="label-text">Name</span>
+                    <span className="label-text">
+                      Name <span className="text-red-500">*</span>
+                    </span>
                   </label>
                   <input
                     type="text"
                     name="name"
                     className="input input-bordered"
-                    onChange={formik.handleChange}
+                    onChange={handleChange}
                     onBlur={formik.handleBlur}
                     value={formik.values.name}
                   />
@@ -107,13 +109,15 @@ export default function Register({ user, setUser }) {
                 </div>
                 <div className="form-control">
                   <label className="label">
-                    <span className="label-text">Email</span>
+                    <span className="label-text">
+                      Email <span className="text-red-500">*</span>
+                    </span>
                   </label>
                   <input
                     type="email"
                     name="email"
                     className="input input-bordered"
-                    onChange={formik.handleChange}
+                    onChange={handleChange}
                     onBlur={formik.handleBlur}
                     value={formik.values.email}
                   />
@@ -124,14 +128,15 @@ export default function Register({ user, setUser }) {
                 <div className="form-control">
                   <label className="label">
                     <span className="label-text">
-                      Password (4 or more characters)
+                      Password (4 or more characters){" "}
+                      <span className="text-red-500">*</span>
                     </span>
                   </label>
                   <input
                     type="password"
                     name="password"
                     className="input input-bordered"
-                    onChange={formik.handleChange}
+                    onChange={handleChange}
                     onBlur={formik.handleBlur}
                     value={formik.values.password}
                   />
@@ -141,13 +146,15 @@ export default function Register({ user, setUser }) {
                 </div>
                 <div className="form-control">
                   <label className="label">
-                    <span className="label-text">Confirm Password</span>
+                    <span className="label-text">
+                      Confirm Password <span className="text-red-500">*</span>
+                    </span>
                   </label>
                   <input
                     type="password"
                     name="confirm"
                     className="input input-bordered"
-                    onChange={formik.handleChange}
+                    onChange={handleChange}
                     onBlur={formik.handleBlur}
                     value={formik.values.confirm}
                   />
@@ -157,12 +164,14 @@ export default function Register({ user, setUser }) {
                 </div>
                 <div className="form-control w-full max-w-xs">
                   <label className="label">
-                    <span className="label-text">Account Type</span>
+                    <span className="label-text">
+                      Account Type <span className="text-red-500">*</span>
+                    </span>
                   </label>
                   <select
                     name="role"
                     className="select select-bordered"
-                    onChange={formik.handleChange}
+                    onChange={handleChange}
                     onBlur={formik.handleBlur}
                     value={formik.values.role}
                   >

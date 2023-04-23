@@ -7,9 +7,9 @@ export default function NavBar({ user, setUser }) {
   console.log(user);
 
   return (
-    <div className="navbar sticky top-0 z-50 bg-neutral-content">
-      <div className="navbar-start">
-        <div className="dropdown">
+    <div className="navbar sticky top-0 z-50 bg-slate-300">
+      <div className="navbar-start text-slate-700	mr-20">
+        <div className="dropdown text-slate-700		">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -46,7 +46,7 @@ export default function NavBar({ user, setUser }) {
         <p className="text text-xl font-black	font-serif ml-20">GlowGetter</p>
       </div>
       <div className="centerMenu navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">
+        <ul className="menu menu-horizontal px-1 text-slate-700		">
           <li>
             <NavLink to="/">Home</NavLink>
           </li>
