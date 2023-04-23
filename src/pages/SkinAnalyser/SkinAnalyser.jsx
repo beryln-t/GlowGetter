@@ -34,7 +34,7 @@ export default function SkinAnalyser() {
                       name={`radio-option-${index}`}
                       id={`radio-option-${index}-yes`}
                       className="radio radio-xs checked:bg-primary"
-                      value="yes"
+                      value="1"
                     />
                     <span className="radio-option-text ">Yes</span>
                   </label>
@@ -44,7 +44,7 @@ export default function SkinAnalyser() {
                       name={`radio-option-${index}`}
                       id={`radio-option-${index}-no`}
                       className="radio radio-xs checked:bg-primary"
-                      value="no"
+                      value="0"
                     />
                     <span className="radio-option-text">No</span>
                   </label>
