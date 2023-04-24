@@ -42,7 +42,10 @@ export default function App() {
       {logoutAlertVisible && <LogOutAlert />}
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/skinanalyser" element={<SkinAnalyser />} />
+        <Route
+          path="/skinanalyser"
+          element={<SkinAnalyser user={user} setUser={setUser} />}
+        />
         <Route path="users">
           <Route
             path="register"

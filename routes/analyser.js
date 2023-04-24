@@ -3,5 +3,6 @@ const router = express.Router();
 const analyserCtrl = require("../controllers/analyser");
 
 router.get("/", analyserCtrl.showQns);
+router.get("/response/:userId", analyserCtrl.getUserResponse);
 
 module.exports = router;

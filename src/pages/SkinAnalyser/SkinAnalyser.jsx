@@ -9,7 +9,12 @@ export default function SkinAnalyser() {
     fetch("/api/analyser")
       .then((response) => response.json())
       .then((data) => {
-        setQuestions(data.map((item) => item.question));
+        setQuestions(
+          data.map((item) => ({
+            qnId: item._id,
+            question: item.question,
+          }))
+        );
       })
       .catch((error) => {
         console.error(error);
