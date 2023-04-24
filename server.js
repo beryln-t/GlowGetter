@@ -9,6 +9,7 @@ require("./config/database");
 const userRouter = require("./routes/users");
 const analyserRouter = require("./routes/analyser");
 const skintypeRouter = require("./routes/skintypes");
+const membersRouter = require("./routes/members");
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -22,6 +23,7 @@ app.use(require("./config/checkToken"));
 app.use("/api/users", userRouter);
 app.use("/api/analyser", analyserRouter);
 app.use("/api/skintypes", skintypeRouter);
+app.use("/api/members", userRouter);
 
 app.get("/api", (req, res) => {
   res.send("Hi!");

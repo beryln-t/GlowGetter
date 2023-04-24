@@ -1,16 +1,16 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import ProfileHeader from "./ProfileHeader";
+import EditProfileHeader from "./EditProfileHeader";
 
-export default function ({ user }) {
+export default function ({ user, setUser }) {
   return (
     <div className="hero min-h-screen bg-stone-50">
       <div className="hero-content flex-col items-center justify-center w-full max-w-xl ">
-        <ProfileHeader />
+        <EditProfileHeader />
         <div className="card flex-shrink-0 w-full max-w-3xl shadow-2xl bg-base-100">
-          <div className="card-body text-slate-800 flex-auto">
+          <div className="card-body text-slate-800 flex-auto ">
             <form>
-              <div>
+              <div className="mb-5">
                 <label className="label">
                   <span className="label-text text-lg font-semibold">
                     Name:
@@ -22,7 +22,7 @@ export default function ({ user }) {
                   value={user.name}
                 />
               </div>
-              <div>
+              <div className="mb-5">
                 <label className="label">
                   <span className="label-text text-lg font-semibold">
                     Email:
@@ -32,7 +32,6 @@ export default function ({ user }) {
                   type="text"
                   className="input input-bordered w-full flex-1 italic"
                   value={user.email}
-                  disabled
                 />
               </div>
               <div>
@@ -43,7 +42,7 @@ export default function ({ user }) {
                 </label>
                 <input
                   type="text"
-                  className="input input-bordered w-full flex-1"
+                  className="input input-bordered w-full flex-1 mb-2"
                   value={user.skintype}
                   disabled
                   placeholder={
@@ -53,13 +52,15 @@ export default function ({ user }) {
                   }
                 />
               </div>
-              <div className="form-control mt-4 flex flex-row gap-2">
-                <NavLink
-                  to="/member/editprofile"
-                  className="btn btn-primary btn w-min w-24"
-                >
-                  Update
-                </NavLink>
+              <NavLink to="/skinanalyser" className="link link-primary mb-5">
+                Click here to take / update Skin Type Analyser
+              </NavLink>
+
+              <div className="form-control mt-5 flex flex-row gap-2">
+                <button className="btn btn-primary btn w-min w-24">Save</button>
+                <button className="btn btn-secondary btn w-min w-24">
+                  Cancel
+                </button>
               </div>
             </form>
           </div>
