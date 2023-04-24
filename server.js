@@ -23,7 +23,7 @@ app.use(require("./config/checkToken"));
 app.use("/api/users", userRouter);
 app.use("/api/analyser", analyserRouter);
 app.use("/api/skintypes", skintypeRouter);
-app.use("/api/members", userRouter);
+app.use("/api/members", membersRouter);
 
 app.get("/api", (req, res) => {
   res.send("Hi!");

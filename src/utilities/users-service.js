@@ -8,14 +8,14 @@ export async function signUp(userData) {
   const token = await usersAPI.signUp(userData);
   localStorage.setItem("token", token);
   // Baby step by returning whatever is sent back by the server
-  return getUser();
+  return await getUser();
 }
 
 export async function login(userData) {
   const token = await usersAPI.login(userData);
   localStorage.setItem("token", token);
   // Baby step by returning whatever is sent back by the server
-  return getUser();
+  return await getUser();
 }
 
 export function getToken() {
@@ -33,8 +33,33 @@ export function getToken() {
   return token;
 }
 
-export function getUser() {
+export async function getUser() {
   const token = getToken();
+  // If there's a token, return the user in the payload, otherwise return null
+  if (!token) {
+    return null;
+  }
+
+  const user = JSON.parse(window.atob(token.split(".")[1])).user;
+  const id = user._id;
+
+  // fetch user data from the API
+  const response = await fetch(`/api/users/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  if (!response.ok) {
+    throw new Error(`Failed to fetch user data: ${response.statusText}`);
+  }
+  const userProfile = await response.json();
+
+  return userProfile;
+}
+
+export function getUserFromToken() {
+  const token = getToken();
+
   // If there's a token, return the user in the payload, otherwise return null
   return token ? JSON.parse(window.atob(token.split(".")[1])).user : null;
 }

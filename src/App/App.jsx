@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Routes, Route } from "react-router";
-import { getUser } from "../utilities/users-service";
+import { getUser, getUserFromToken } from "../utilities/users-service";
 
 //Components
 import NavBar from "../components/NavBar/NavBar";
@@ -21,7 +21,7 @@ import NoMatch from "../components/NoMatch/NoMatch";
 import { CustomEvents } from "../utilities/CustomEvents";
 
 export default function App() {
-  const [user, setUser] = useState(getUser());
+  const [user, setUser] = useState(null);
   const [logoutAlertVisible, setLogoutAlertVisible] = useState(false);
 
   const onShowLogoutAlert = () => {
@@ -30,7 +30,15 @@ export default function App() {
   };
 
   useEffect(() => {
+    async function fetchData() {
+      const user = await getUser();
+      setUser(user);
+      console.log("fetch user ", user);
+      return user;
+    }
     document.addEventListener(CustomEvents.ShowLogoutAlert, onShowLogoutAlert);
+    fetchData();
+
     return () =>
       document.removeEventListener(
         CustomEvents.ShowLogoutAlert,

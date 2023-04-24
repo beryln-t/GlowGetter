@@ -85,4 +85,21 @@ const signin = async (req, res) => {
   }
 };
 
-module.exports = { create, signin };
+const fetchUser = async (req, res) => {
+  try {
+    console.log("hi");
+    const userId = req.params.userId;
+    console.log("userId", userId);
+
+    const user = await User.findById(userId);
+    if (!user) {
+      res.status(404).json({ error: "User not found" });
+      return;
+    }
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+module.exports = { create, signin, fetchUser };

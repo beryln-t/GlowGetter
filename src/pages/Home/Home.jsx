@@ -2,9 +2,11 @@ import React, { useState } from "react";
 // @ts-ignore
 import HomePageBG from "../../components/HomePageBG/HomePageBG.jpg";
 import { Link } from "react-router-dom";
+import { getToken } from "../../utilities/users-service";
 
 export default function Home() {
   const [loaded, setLoaded] = useState(false);
+  const token = getToken();
 
   const handleImageLoad = () => {
     console.log("Image loaded successfully");
@@ -35,11 +37,22 @@ export default function Home() {
             <p className="mb-5 text-lg">
               Achieving glowy skin starts with using the right products for your
               skin type. Our Skin Type Analyser helps you determine your skin
-              type, to provide you with personalised product recommendations!
+              type, to provide you with personalised product recommendations.
+              {token ? null : (
+                <span className="removeOnLogin">
+                  Register now to try the skin type analyser!
+                </span>
+              )}
             </p>
-            <Link to="/skinanalyser" className="btn btn-primary">
-              Try the Skin Type Analyser
-            </Link>
+            {token ? (
+              <Link to="/skinanalyser" className="btn btn-primary">
+                Try the Skin Type Analyser
+              </Link>
+            ) : (
+              <Link to="/users/register" className="btn btn-primary">
+                Register
+              </Link>
+            )}
           </div>
         </div>
       </div>

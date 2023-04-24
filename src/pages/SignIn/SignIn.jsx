@@ -26,7 +26,7 @@ export default function SignIn({ setUser }) {
     onSubmit: async (values) => {
       try {
         const user = await login(values);
-        setUser(getUser());
+        setUser(user);
         navigate("/");
       } catch {
         setError("Login failed. Try again.");

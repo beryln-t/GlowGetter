@@ -45,8 +45,8 @@ export default function Register({ user, setUser }) {
     validationSchema: validationSchema,
     onSubmit: async (values) => {
       try {
-        await signUp(values);
-        setUser(getUser());
+        const user = await signUp(values);
+        setUser(user);
         navigate("/users/signin");
       } catch (error) {
         if (error.message.includes("email")) {

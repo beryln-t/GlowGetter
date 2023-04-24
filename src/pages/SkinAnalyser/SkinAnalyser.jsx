@@ -61,7 +61,7 @@ export default function SkinAnalyser(user, setUser) {
                 <div key={question.qnId} className="form-control">
                   <div className="flex flex-row items-center">
                     <label className="label text-lg	font-semibold	">
-                      {`Qn ${index + 1}. ${question}`}
+                      {`Qn ${index + 1}. ${question.question}`}
                     </label>
                     <span className="text-red-500">*</span>
                   </div>
