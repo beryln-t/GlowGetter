@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Routes, Route } from "react-router";
-import { getUser, getUserFromToken } from "../utilities/users-service";
+import { getUser } from "../utilities/users-service";
 
 //Components
 import NavBar from "../components/NavBar/NavBar";
@@ -26,7 +26,7 @@ export default function App() {
 
   const onShowLogoutAlert = () => {
     setLogoutAlertVisible(true);
-    setTimeout(() => setLogoutAlertVisible(false), 1000);
+    setTimeout(() => setLogoutAlertVisible(false), 3000);
   };
 
   useEffect(() => {

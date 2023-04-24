@@ -6,8 +6,9 @@ export async function signUp(userData) {
   // Delegate the network request code to the users-api.js API module
   // which will ultimately return a JSON Web Token (JWT)
   const token = await usersAPI.signUp(userData);
-  localStorage.setItem("token", token);
+  // localStorage.setItem("token", token);
   // Baby step by returning whatever is sent back by the server
+  // return getUserFromToken(token);
   return await getUser();
 }
 
@@ -15,7 +16,7 @@ export async function login(userData) {
   const token = await usersAPI.login(userData);
   localStorage.setItem("token", token);
   // Baby step by returning whatever is sent back by the server
-  return await getUser();
+  return getUserFromToken(token);
 }
 
 export function getToken() {
@@ -35,12 +36,13 @@ export function getToken() {
 
 export async function getUser() {
   const token = getToken();
-  // If there's a token, return the user in the payload, otherwise return null
+  console.log("token ", token); // If there's a token, return the user in the payload, otherwise return null
   if (!token) {
     return null;
   }
 
-  const user = JSON.parse(window.atob(token.split(".")[1])).user;
+  const user = getUserFromToken(token);
+  console.log("user", user);
   const id = user._id;
 
   // fetch user data from the API
@@ -57,9 +59,7 @@ export async function getUser() {
   return userProfile;
 }
 
-export function getUserFromToken() {
-  const token = getToken();
-
+export function getUserFromToken(token) {
   // If there's a token, return the user in the payload, otherwise return null
   return token ? JSON.parse(window.atob(token.split(".")[1])).user : null;
 }

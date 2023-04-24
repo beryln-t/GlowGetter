@@ -60,7 +60,7 @@ export default function NavBar({ user, setUser }) {
           </li>
         </ul>
       </div>
-      {token ? <PostSignInNB user={user} setUser={setUser} /> : <PreSignInNB />}
+      {user ? <PostSignInNB user={user} setUser={setUser} /> : <PreSignInNB />}
     </div>
   );
 }

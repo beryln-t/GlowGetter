@@ -40,6 +40,7 @@ export default function Home() {
               type, to provide you with personalised product recommendations.
               {token ? null : (
                 <span className="removeOnLogin">
+                  {" "}
                   Register now to try the skin type analyser!
                 </span>
               )}

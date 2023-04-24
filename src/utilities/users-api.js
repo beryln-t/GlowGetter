@@ -9,11 +9,12 @@ export async function signUp(userData) {
     body: JSON.stringify(userData),
   });
   const data = await res.json();
+  console.log("data ", data);
   // Check if request was successful
   if (res.ok) {
     // res.json() will resolve to the JWT
     return data;
-  } else if (data.keyPattern && data.keyPattern.email) {
+  } else if (data?.message?.startsWith("Email")) {
     throw new Error("Email Taken");
   } else {
     throw new Error("Invalid Sign Up");

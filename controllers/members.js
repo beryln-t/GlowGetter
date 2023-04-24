@@ -9,7 +9,7 @@ const editProfile = async (req, res) => {
     console.log("user ", user);
     if (user.email !== email) {
       // Check if email is already taken
-      let emailExists = await User.exists(email);
+      let emailExists = await User.exists({ email });
       if (emailExists) {
         return res.status(400).json({ error: "Email taken" });
       }

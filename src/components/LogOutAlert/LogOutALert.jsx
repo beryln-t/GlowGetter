@@ -1,6 +1,6 @@
 export default function LogOutAlert() {
   return (
-    <div className="alert alert-info flex justify-center transition-all	">
+    <div className="alert alert-success flex justify-center transition-all	">
       <div>
         <svg
           xmlns="http://www.w3.org/2000/svg"

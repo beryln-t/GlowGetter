@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getUser, signUp } from "../../utilities/users-service";
+import { signUp } from "../../utilities/users-service";
 import { Link } from "react-router-dom";
 import { useFormik } from "formik";
 import * as yup from "yup";
@@ -45,11 +45,14 @@ export default function Register({ user, setUser }) {
     validationSchema: validationSchema,
     onSubmit: async (values) => {
       try {
-        const user = await signUp(values);
-        setUser(user);
+        await signUp(values);
+        // const user = await signUp(values);
+        // console.log("user ", user);
+        // setUser(user);
         navigate("/users/signin");
       } catch (error) {
-        if (error.message.includes("email")) {
+        console.log("error ", error.message);
+        if (error.message.includes("Email")) {
           setError("This email already has an account");
         } else {
           setError(error.message);
