@@ -15,7 +15,7 @@ export default function PostSignInNB({ user, setUser }) {
     navigate("/");
   };
   return (
-    <div className="navbar-end mr-20 max-w-full	text-slate-700	">
+    <div className="navbar-end max-w-full	text-slate-700	">
       <div className="flex items-stretch">
         <div className="dropdown dropdown-end">
           <label tabIndex={0} className="btn btn-ghost rounded-btn ">

@@ -24,9 +24,13 @@ export default function SkinAnalyser() {
           <div className="card-body text-slate-800">
             {questions.map((question, index) => (
               <div key={index} className="form-control">
-                <label className="label text-lg	font-semibold	">
-                  {`Qn ${index + 1}. ${question}`}
-                </label>
+                <div className="flex flex-row items-center">
+                  <label className="label text-lg	font-semibold	">
+                    {`Qn ${index + 1}. ${question}`}
+                  </label>
+                  <span className="text-red-500">*</span>
+                </div>
+
                 <div className="radio-options flex flex-col gap-2">
                   <label className="radio-option cursor-pointer flex items-center content-center gap-1">
                     <input
