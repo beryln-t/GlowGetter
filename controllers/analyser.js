@@ -1,6 +1,7 @@
 const Analyser = require("../models/Analyser");
 const User = require("../models/User");
 const Skintype = require("../models/Skintype");
+const { response } = require("express");
 
 const showQns = async (req, res) => {
   try {
@@ -33,30 +34,44 @@ const getUserResponse = async (req, res) => {
 const saveResponse = async (req, res) => {
   try {
     const userId = req.params.userId;
-    const user = await User.findById(userId);
-
-    if (!user) {
-      return res.status(404).json({ message: "User not found" });
-    }
-
-    const { responses } = req.body;
+    const responses = req.body;
+    console.log("responses ", responses);
     const responseArray = responses.map((response) => ({
       question: response.question,
       answer: response.answer,
     }));
 
-    // If the user already has responses, merge the new responses with the existing ones
-    if (user.analyserResponse) {
-      user.analyserResponse = [...user.analyserResponse, ...responseArray];
-    } else {
-      user.analyserResponse = responseArray;
+    let score = 0;
+    const analysers = await Analyser.find({});
+    console.log("analysers ", analysers);
+    for (const response of responseArray) {
+      const question = analysers.find(
+        (analyser) => analyser._id.toString() === response.question
+      );
+      console.log("question ", question);
+      if (question) {
+        if (response.answer === "1") {
+          score += question.yesScore;
+          console.log("this is the score", question.yesScore);
+        } else if (response.answer === "0") {
+          score += question.noScore;
+        }
+      }
     }
+    console.log("what score", score);
 
-    await user.save();
+    const result = await User.findByIdAndUpdate(userId, {
+      analyserResponse: responseArray,
+      analyserScore: score,
+    });
+
+    if (!result) {
+      return res.status(404).json({ message: "User not found" });
+    }
 
     res.status(200).json({ message: "Response saved successfully" });
   } catch (error) {
-    console.error(error);
+    console.error("analyzer", error);
     res.status(500).json({ message: "Server error" });
   }
 };

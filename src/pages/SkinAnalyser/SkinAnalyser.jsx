@@ -1,54 +1,106 @@
 import React, { useState, useEffect } from "react";
 import IntroMsg from "./IntroMsg";
-import AnalyserButtons from "./AnalyserButtons";
 
-export default function SkinAnalyser(user, setUser) {
+export default function SkinAnalyser({ user }) {
   const [questions, setQuestions] = useState([]);
-  const [responses, setResponses] = useState([]);
-  console.log(user);
-  useEffect(() => {
-    fetch("/api/analyser")
+  const [responseMap, setResponseMap] = useState({});
+
+  const getQuestions = async () => {
+    return await fetch("/api/analyser")
       .then((response) => response.json())
-      .then((data) => {
-        setQuestions(
-          data.map((item) => ({
-            qnId: item._id,
-            question: item.question,
-          }))
-        );
-      })
+      .then((data) => data)
       .catch((error) => {
         console.error(error);
       });
-  }, []);
+  };
+
+  const getResponses = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await fetch(`/api/analyser/response/${user._id}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+      });
+      return await response.json();
+    } catch (error) {
+      console.error(error);
+      return null;
+    }
+  };
+
+  async function initalizeAnalyzer() {
+    const questionRes = await getQuestions();
+    const questionsArr = questionRes.map((item) => ({
+      qnId: item._id,
+      question: item.question,
+    }));
+    setQuestions(questionsArr);
+    const responseRes = await getResponses();
+    console.log("response res", responseRes);
+    const responseMap = responseRes.analyserResponse.reduce(
+      (prev, response) => ({
+        ...prev,
+        [response.question]: response.answer,
+      }),
+      {}
+    );
+    setResponseMap(responseMap);
+  }
+
+  useEffect(() => {
+    // If user is null, there will not be response
+    if (user) {
+      initalizeAnalyzer();
+    }
+  }, [user]);
 
   const handleRadioChange = (e, qnId) => {
+    const answer = Number(e.target.value);
     const newResponse = {
       question: qnId,
-      answer: e.target.value,
+      answer,
     };
-    const newResponses = responses.filter((r) => r.question !== qnId);
-    setResponses([...newResponses, newResponse]);
+    // const newResponses = responses.filter((r) => r.question !== qnId);
+    // setResponses([...newResponses, newResponse]);
+
+    console.log("qnid ", qnId);
+    console.log("answer ", answer);
+    console.log("radio change responsemap ", responseMap);
+    setResponseMap((prevState) => ({
+      ...prevState,
+      [qnId]: answer,
+    }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(responses);
-    fetch(`/api/analyser/response/${user._id}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(responses),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-      })
-      .catch((error) => {
-        console.error(error);
+    // console.log("response", responses);
+    const responses = Object.keys(responseMap).map((id) => ({
+      question: id,
+      answer: responseMap[id],
+    }));
+    try {
+      const token = localStorage.getItem("token");
+      const response = await fetch(`/api/analyser/response/${user._id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+        body: JSON.stringify(responses),
       });
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.error(error);
+    }
   };
+
+  console.log("responseMap ", responseMap);
+  console.log("questions ", questions);
 
   return (
     <div className="hero min-h-screen bg-stone-50">
@@ -73,7 +125,9 @@ export default function SkinAnalyser(user, setUser) {
                         name={question.qnId}
                         id={`${question.qnId}-yes`}
                         className="radio radio-xs checked:bg-primary"
-                        value="1"
+                        value={1}
+                        // defaultChecked={responseMap[question.qnId] === 1}
+                        checked={responseMap[question.qnId] === 1}
                         onChange={(e) => handleRadioChange(e, question.qnId)}
                       />
                       <span className="radio-option-text ">Yes</span>
@@ -84,7 +138,9 @@ export default function SkinAnalyser(user, setUser) {
                         name={question.qnId}
                         id={`${question.qnId}-no`}
                         className="radio radio-xs checked:bg-primary"
-                        value="0"
+                        value={0}
+                        // defaultChecked={responseMap[question.qnId] === 0}
+                        checked={responseMap[question.qnId] === 0}
                         onChange={(e) => handleRadioChange(e, question.qnId)}
                       />
                       <span className="radio-option-text">No</span>
