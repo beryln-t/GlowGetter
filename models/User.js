@@ -34,7 +34,7 @@ const userSchema = new Schema(
           ref: "Analyser",
         },
         answer: {
-          type: String,
+          type: Number,
           required: true,
           enum: ["0", "1"],
         },

@@ -28,7 +28,7 @@ export default function SkinAnalyser() {
         <div className="card flex-shrink-0 w-full max-w-3xl shadow-2xl bg-base-100">
           <div className="card-body text-slate-800">
             {questions.map((question, index) => (
-              <div key={index} className="form-control">
+              <div key={question.qnId} className="form-control">
                 <div className="flex flex-row items-center">
                   <label className="label text-lg	font-semibold	">
                     {`Qn ${index + 1}. ${question}`}
@@ -40,7 +40,7 @@ export default function SkinAnalyser() {
                   <label className="radio-option cursor-pointer flex items-center content-center gap-1">
                     <input
                       type="radio"
-                      name={`radio-option-${index}`}
+                      name={question.qnId}
                       id={`radio-option-${index}-yes`}
                       className="radio radio-xs checked:bg-primary"
                       value="1"
@@ -50,7 +50,7 @@ export default function SkinAnalyser() {
                   <label className="radio-option cursor-pointer flex items-center content-center gap-1">
                     <input
                       type="radio"
-                      name={`radio-option-${index}`}
+                      name={question.qnId}
                       id={`radio-option-${index}-no`}
                       className="radio radio-xs checked:bg-primary"
                       value="0"
