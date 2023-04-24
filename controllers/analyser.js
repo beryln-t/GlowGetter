@@ -30,4 +30,29 @@ const getUserResponse = async (req, res) => {
   }
 };
 
-module.exports = { showQns, getUserResponse };
+const saveResponse = async (req, res) => {
+  try {
+    const userId = req.params.userId;
+    const user = await User.findById(userId);
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    const { responses } = req.body;
+    const responseArray = responses.map((response) => ({
+      question: response.question,
+      answer: response.answer,
+    }));
+
+    user.analyserResponse = responseArray;
+    await user.save();
+
+    res.status(200).json({ message: "Response saved successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+module.exports = { showQns, getUserResponse, saveResponse };
