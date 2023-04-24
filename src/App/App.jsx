@@ -11,7 +11,6 @@ import Home from "../pages/Home/Home";
 import Register from "../pages/Register/Register";
 import SignIn from "../pages/SignIn/SignIn";
 import SkinAnalyser from "../pages/SkinAnalyser/SkinAnalyser";
-import Recommendations from "../pages/Recommendations/Recommendations";
 
 // error message components
 import NoMatch from "../components/NoMatch/NoMatch";
@@ -44,7 +43,6 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/skinanalyser" element={<SkinAnalyser />} />
-        <Route path="/recommendations" element={<Recommendations />} />
         <Route path="users">
           <Route
             path="register"

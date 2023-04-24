@@ -6,7 +6,7 @@ export default function SkinAnalyser() {
   const [questions, setQuestions] = useState([]);
 
   useEffect(() => {
-    fetch("/api/analyser") //
+    fetch("/api/analyser")
       .then((response) => response.json())
       .then((data) => {
         setQuestions(data.map((item) => item.question));
@@ -18,7 +18,7 @@ export default function SkinAnalyser() {
 
   return (
     <div className="hero min-h-screen bg-stone-50">
-      <div className="hero-content flex-col items-center justify-start">
+      <div className="hero-content flex-col items-center justify-center">
         <IntroMsg />
         <div className="card flex-shrink-0 w-full max-w-3xl shadow-2xl bg-base-100">
           <div className="card-body text-slate-800">
