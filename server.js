@@ -23,6 +23,10 @@ app.use("/api/users", userRouter);
 app.use("/api/analyser", analyserRouter);
 app.use("/api/skintypes", skintypeRouter);
 
+app.get("/api", (req, res) => {
+  res.send("Hi!");
+});
+
 app.get("/*", function (req, res) {
   res.sendFile(path.join(__dirname, "dist", "index.html"));
 });

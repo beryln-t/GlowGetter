@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 
 export default function PreSignIn() {
   return (
-    <div className="navbar-end mr-20">
+    <div className="navbar-end max-w-full mr-20">
       <NavLink
         className="btn btn-outline btn-primary btn-xs sm:btn-sm md:btn-md"
         to="/users/signin"
