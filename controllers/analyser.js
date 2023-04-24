@@ -45,7 +45,13 @@ const saveResponse = async (req, res) => {
       answer: response.answer,
     }));
 
-    user.analyserResponse = responseArray;
+    // If the user already has responses, merge the new responses with the existing ones
+    if (user.analyserResponse) {
+      user.analyserResponse = [...user.analyserResponse, ...responseArray];
+    } else {
+      user.analyserResponse = responseArray;
+    }
+
     await user.save();
 
     res.status(200).json({ message: "Response saved successfully" });

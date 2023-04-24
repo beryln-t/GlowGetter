@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import IntroMsg from "./IntroMsg";
 import AnalyserButtons from "./AnalyserButtons";
 
-export default function SkinAnalyser() {
+export default function SkinAnalyser(user, setUser) {
   const [questions, setQuestions] = useState([]);
   const [responses, setResponses] = useState([]);
-
+  console.log(user);
   useEffect(() => {
     fetch("/api/analyser")
       .then((response) => response.json())
@@ -33,7 +33,8 @@ export default function SkinAnalyser() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch("/api/analyser/response/${user._id}}", {
+    console.log(responses);
+    fetch(`/api/analyser/response/${user._id}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -81,7 +82,7 @@ export default function SkinAnalyser() {
                       <input
                         type="radio"
                         name={question.qnId}
-                        id={`{question.qnId}-no`}
+                        id={`${question.qnId}-no`}
                         className="radio radio-xs checked:bg-primary"
                         value="0"
                         onChange={(e) => handleRadioChange(e, question.qnId)}

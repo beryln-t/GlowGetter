@@ -1,7 +1,7 @@
 import React from "react";
 import { FiChevronDown } from "react-icons/fi";
 import { logOut } from "../../utilities/users-service";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, NavLink } from "react-router-dom";
 import { CustomEvents } from "../../utilities/CustomEvents";
 
 export default function PostSignInNB({ user, setUser }) {
@@ -36,7 +36,7 @@ export default function PostSignInNB({ user, setUser }) {
             ) : (
               <div>
                 <li>
-                  <a>My Profile</a>
+                  <NavLink to="/member/myprofile">My Profile</NavLink>
                 </li>
                 <li>
                   <a>My Wishlist</a>
