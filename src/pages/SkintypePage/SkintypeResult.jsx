@@ -39,7 +39,7 @@ export default function ({ user }) {
     return <div>{error}</div>;
   }
   if (!skintype) {
-    return <div>no skintype</div>;
+    return <div>loading</div>;
   }
 
   return (
