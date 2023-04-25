@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 export default function SkintypeResult({ user }) {
-  const [skintype, setSkintype] = useState();
+  const [skintype, setSkintype] = useState(user);
   const [error, setError] = useState();
 
   useEffect(() => {
