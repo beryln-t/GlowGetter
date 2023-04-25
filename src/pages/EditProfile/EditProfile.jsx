@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import EditProfileHeader from "./EditProfileHeader";
 import { getUser } from "../../utilities/users-service";
 
 export default function ({ user, setUser }) {
   const [editedUser, setEditedUser] = useState(user);
+  const [originalUser, setOriginalUser] = useState(user);
+  const navigate = useNavigate();
 
   useEffect(() => {
     setEditedUser(user);
+    setOriginalUser(user);
   }, [user]);
 
   const handleChange = (event) => {
@@ -42,9 +45,15 @@ export default function ({ user, setUser }) {
       setUser(updatedUser);
       setEditedUser(updatedUser);
       console.log("updatedUser", updatedUser);
+      navigate("/member/myprofile");
     } catch (error) {
       console.error(error);
     }
+  };
+
+  const handleCancel = (e) => {
+    e.preventDefault();
+    setEditedUser(originalUser);
   };
 
   return (
@@ -69,7 +78,7 @@ export default function ({ user, setUser }) {
                     onChange={handleChange}
                   />
                 </div>
-                <div className="mb-5">
+                <div className="mb-5 mt-0">
                   <label className="label">
                     <span className="label-text text-lg font-semibold">
                       Email:
@@ -83,7 +92,7 @@ export default function ({ user, setUser }) {
                     onChange={handleChange}
                   />
                 </div>
-                <div>
+                <div className="mt-0">
                   <label className="label">
                     <span className="label-text text-lg font-semibold">
                       Skin type:
@@ -92,7 +101,7 @@ export default function ({ user, setUser }) {
                   <input
                     type="text"
                     className="input input-bordered w-full flex-1"
-                    value={editedUser.skintype}
+                    value={editedUser.skintype.type}
                     name="skintype"
                     onChange={handleChange}
                     placeholder={
@@ -111,7 +120,10 @@ export default function ({ user, setUser }) {
                   <button className="btn btn-primary btn w-min w-24">
                     Save
                   </button>
-                  <button className="btn btn-secondary btn w-min w-24">
+                  <button
+                    className="btn btn-secondary btn w-min w-24"
+                    onClick={handleCancel}
+                  >
                     Cancel
                   </button>
                 </div>

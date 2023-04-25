@@ -10,7 +10,7 @@ export default function ({ user }) {
   }, [user]);
 
   return (
-    !!userProfile && (
+    userProfile && (
       <div className="hero min-h-screen bg-stone-50">
         <div className="hero-content flex-col items-center justify-center w-full max-w-xl ">
           <ProfileHeader />
@@ -26,7 +26,7 @@ export default function ({ user }) {
                   <input
                     type="text"
                     className="input input-bordered w-full flex-1 italic"
-                    value={userProfile?.name}
+                    value={userProfile.name}
                     disabled
                   />
                 </div>
@@ -39,7 +39,7 @@ export default function ({ user }) {
                   <input
                     type="text"
                     className="input input-bordered w-full flex-1 italic"
-                    value={userProfile?.email}
+                    value={userProfile.email}
                     disabled
                   />
                 </div>
@@ -49,13 +49,14 @@ export default function ({ user }) {
                       Skin type:
                     </span>
                   </label>
+
                   <input
                     type="text"
                     className="input input-bordered w-full flex-1"
-                    value={userProfile?.skintype}
+                    value={userProfile.skintype.type}
                     disabled
                     placeholder={
-                      userProfile?.skintype
+                      userProfile.skintype
                         ? undefined
                         : "No skin type recorded. Take analyser to determine skin type"
                     }
