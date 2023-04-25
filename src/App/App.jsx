@@ -24,6 +24,7 @@ import { CustomEvents } from "../utilities/CustomEvents";
 export default function App() {
   const [user, setUser] = useState(null);
   const [logoutAlertVisible, setLogoutAlertVisible] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const onShowLogoutAlert = () => {
     setLogoutAlertVisible(true);
@@ -35,6 +36,8 @@ export default function App() {
       const user = await getUser();
       setUser(user);
       console.log("fetch user ", user);
+
+      setLoading(false);
       return user;
     }
     document.addEventListener(CustomEvents.ShowLogoutAlert, onShowLogoutAlert);
@@ -49,7 +52,7 @@ export default function App() {
 
   return (
     <main className="App">
-      <NavBar user={user} setUser={setUser} />
+      <NavBar user={user} setUser={setUser} loading={loading} />
       {logoutAlertVisible && <LogOutAlert />}
       <Routes>
         <Route path="/" element={<Home />} />

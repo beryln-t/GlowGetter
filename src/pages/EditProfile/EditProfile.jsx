@@ -44,7 +44,6 @@ export default function ({ user, setUser }) {
       const updatedUser = await getUser();
       setUser(updatedUser);
       setEditedUser(updatedUser);
-      console.log("updatedUser", updatedUser);
       navigate("/member/myprofile");
     } catch (error) {
       console.error(error);

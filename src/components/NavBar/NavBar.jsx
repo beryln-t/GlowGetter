@@ -4,9 +4,11 @@ import PreSignInNB from "./PreSignInNB";
 import PostSignInNB from "./PostSignInNB";
 import { getToken } from "../../utilities/users-service";
 
-export default function NavBar({ user, setUser }) {
-  console.log(user);
+export default function NavBar({ loading, user, setUser }) {
   const token = getToken();
+
+  const renderNavBar = () =>
+    user ? <PostSignInNB user={user} setUser={setUser} /> : <PreSignInNB />;
 
   return (
     <div className="navbar sticky top-0 z-50 bg-slate-300 px-5">
@@ -60,7 +62,7 @@ export default function NavBar({ user, setUser }) {
           </li>
         </ul>
       </div>
-      {user ? <PostSignInNB user={user} setUser={setUser} /> : <PreSignInNB />}
+      {!loading ? renderNavBar() : null}
     </div>
   );
 }

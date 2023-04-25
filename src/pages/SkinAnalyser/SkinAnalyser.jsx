@@ -43,7 +43,6 @@ export default function SkinAnalyser({ user, setUser }) {
     }));
     setQuestions(questionsArr);
     const responseRes = await getResponses();
-    console.log("response res", responseRes);
     const responseMap = responseRes.analyserResponse.reduce(
       (prev, response) => ({
         ...prev,
@@ -69,9 +68,6 @@ export default function SkinAnalyser({ user, setUser }) {
       answer,
     };
 
-    console.log("qnid ", qnId);
-    console.log("answer ", answer);
-    console.log("radio change responsemap ", responseMap);
     setResponseMap((prevState) => ({
       ...prevState,
       [qnId]: answer,
@@ -95,7 +91,6 @@ export default function SkinAnalyser({ user, setUser }) {
         body: JSON.stringify(responses),
       });
       const data = await response.json();
-      console.log(data);
       const updatedUser = await getUser();
       setUser(updatedUser); // update the user state here
       navigate(`/member/skintype/${updatedUser.skintype._id}`);
@@ -103,9 +98,6 @@ export default function SkinAnalyser({ user, setUser }) {
       console.error(error);
     }
   };
-
-  console.log("responseMap ", responseMap);
-  console.log("questions ", questions);
 
   const handleCancel = (e) => {
     e.preventDefault();

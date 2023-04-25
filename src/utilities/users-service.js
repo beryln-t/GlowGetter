@@ -16,7 +16,8 @@ export async function login(userData) {
   const token = await usersAPI.login(userData);
   localStorage.setItem("token", token);
   // Baby step by returning whatever is sent back by the server
-  return getUserFromToken(token);
+  // return getUserFromToken(token);
+  return await getUser();
 }
 
 export function getToken() {
@@ -36,13 +37,12 @@ export function getToken() {
 
 export async function getUser() {
   const token = getToken();
-  console.log("token ", token); // If there's a token, return the user in the payload, otherwise return null
+  // If there's a token, return the user in the payload, otherwise return null
   if (!token) {
     return null;
   }
 
   const user = getUserFromToken(token);
-  console.log("user", user);
   const id = user._id;
 
   // fetch user data from the API

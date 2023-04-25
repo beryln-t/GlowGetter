@@ -24,7 +24,6 @@ export default function ({ user }) {
           }
         );
         const data = await response.json();
-        console.log("what is showing???", data);
         if (!response.ok) {
           throw new Error(data.error);
         }
@@ -45,13 +44,9 @@ export default function ({ user }) {
 
   return (
     <div className="hero min-h-screen bg-stone-50">
-      <div className="hero-content flex-col items-center justify-center">
-        <div>
-          <SkinTypeText skintype={skintype} />
-        </div>
-        <div>
-          <RecommendedProducts />
-        </div>
+      <div className="flex flex-col justify-center items-center">
+        <SkinTypeText skintype={skintype} />
+        <RecommendedProducts />
       </div>
     </div>
   );

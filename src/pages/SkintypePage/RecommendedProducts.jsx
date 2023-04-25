@@ -1,15 +1,133 @@
 export default function () {
   return (
-    <div className="">
-      <div className="card card-compact w-80 h-90 bg-base-100 flex-col items-center justify-center">
-        <figure>
-          <img src="https://i.imgur.com/raYTKqT.jpg" alt="Shoes" />
-        </figure>
-        <div className="card-body">
-          <h2 className="card-title">Shoes!</h2>
-          <p>If a dog chews shoes whose shoes does he choose?</p>
-          <div className="card-actions justify-start">
-            <button className="btn btn-primary">Buy Now</button>
+    <div className="flex flex-row justify-center flex-wrap w-full">
+      <div>
+        <div className="card flex flex-col bg-base-100 shadow-xl w-80 p-5 m-3">
+          <div className="flex flex-col items-center relative">
+            <button className="btn btn-circle btn-outline btn-error absolute left-0">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                />
+              </svg>
+            </button>
+            <img
+              src="https://i.imgur.com/raYTKqT.jpg"
+              alt="Shoes"
+              className="w-2/3 h-auto"
+            />
+            <div className="flex flex-col justify-start w-full">
+              <p className="text-base font-extrabold leading-7	">
+                product brand
+              </p>
+              <p className="text-sm leading-7	">product name</p>
+              <p className="text-sm font-semibold leading-7	">product name</p>
+            </div>
+          </div>
+        </div>
+        <div className="card flex flex-col bg-base-100 shadow-xl w-80 p-5 m-3">
+          <div className="flex flex-col items-center relative">
+            <button className="btn btn-circle btn-outline btn-error absolute left-0">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                />
+              </svg>
+            </button>
+            <img
+              src="https://i.imgur.com/raYTKqT.jpg"
+              alt="Shoes"
+              className="w-2/3 h-auto"
+            />
+            <div className="flex flex-col justify-start w-full">
+              <p className="text-base font-extrabold leading-7	">
+                product brand
+              </p>
+              <p className="text-sm leading-7	">product name</p>
+              <p className="text-sm font-semibold leading-7	">product name</p>
+            </div>
+          </div>
+        </div>
+        <div className="card flex flex-col bg-base-100 shadow-xl w-80 p-5 m-3">
+          <div className="flex flex-col items-center relative">
+            <button className="btn btn-circle btn-outline btn-error absolute left-0">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                />
+              </svg>
+            </button>
+            <img
+              src="https://i.imgur.com/raYTKqT.jpg"
+              alt="Shoes"
+              className="w-2/3 h-auto"
+            />
+            <div className="flex flex-col justify-start w-full">
+              <p className="text-base font-extrabold leading-7	">
+                product brand
+              </p>
+              <p className="text-sm leading-7	">product name</p>
+              <p className="text-sm font-semibold leading-7	">product name</p>
+            </div>
+          </div>
+        </div>
+        <div className="card flex flex-col bg-base-100 shadow-xl w-80 p-5 m-3">
+          <div className="flex flex-col items-center relative">
+            <button className="btn btn-circle btn-outline btn-error absolute left-0">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                />
+              </svg>
+            </button>
+            <img
+              src="https://i.imgur.com/raYTKqT.jpg"
+              alt="Shoes"
+              className="w-2/3 h-auto"
+            />
+            <div className="flex flex-col justify-start w-full">
+              <p className="text-base font-extrabold leading-7	">
+                product brand
+              </p>
+              <p className="text-sm leading-7	">product name</p>
+              <p className="text-sm font-semibold leading-7	">product name</p>
+            </div>
           </div>
         </div>
       </div>

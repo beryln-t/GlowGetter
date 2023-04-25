@@ -9,7 +9,6 @@ export default function Home() {
   const token = getToken();
 
   const handleImageLoad = () => {
-    console.log("Image loaded successfully");
     setLoaded(true);
   };
 
@@ -18,8 +17,6 @@ export default function Home() {
     opacity: loaded ? 1 : 0.1, // set opacity to 1 when loaded is true
     transition: "opacity 1s ease-in-out", // add a smooth fade-in transition
   };
-
-  console.log("loaded ", loaded);
 
   return (
     <div>

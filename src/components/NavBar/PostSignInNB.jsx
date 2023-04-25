@@ -14,6 +14,11 @@ export default function PostSignInNB({ user, setUser }) {
     document.dispatchEvent(new CustomEvent(CustomEvents.ShowLogoutAlert));
     navigate("/");
   };
+
+  const getNavLink = isNaN(user.analyserScore)
+    ? "/skinanalyser"
+    : `/member/skintype/${user.skintype._id}`;
+
   return (
     <div className="navbar-end max-w-full	text-slate-700	">
       <div className="flex items-stretch">
@@ -43,9 +48,7 @@ export default function PostSignInNB({ user, setUser }) {
                     <a>My Wishlist</a>
                   </li>
                   <li>
-                    <NavLink to={`/member/skintype/${user.skintype._id}`}>
-                      My Skin Type
-                    </NavLink>
+                    <NavLink to={getNavLink}>My Skin Type</NavLink>
                   </li>
                 </div>
               )}

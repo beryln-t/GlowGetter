@@ -9,7 +9,6 @@ export async function signUp(userData) {
     body: JSON.stringify(userData),
   });
   const data = await res.json();
-  console.log("data ", data);
   // Check if request was successful
   if (res.ok) {
     // res.json() will resolve to the JWT

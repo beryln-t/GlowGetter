@@ -51,7 +51,6 @@ export default function Register({ user, setUser }) {
         // setUser(user);
         navigate("/users/signin");
       } catch (error) {
-        console.log("error ", error.message);
         if (error.message.includes("Email")) {
           setError("This email already has an account");
         } else {
