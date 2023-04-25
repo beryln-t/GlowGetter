@@ -34,7 +34,7 @@ export default function Home() {
         <div className="hero-content text-center text-neutral-content ">
           <div className="max-w-lg">
             <h1 className="mb-5 text-5xl font-bold"> Welcome to GlowGetter!</h1>
-            <p className="mb-5 text-lg">
+            <p className="mb-5 text-lg text-justify">
               Achieving glowy skin starts with using the right products for your
               skin type. Our Skin Type Analyser helps you determine your skin
               type, to provide you with personalised product recommendations.

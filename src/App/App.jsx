@@ -13,7 +13,8 @@ import SignIn from "../pages/SignIn/SignIn";
 import SkinAnalyser from "../pages/SkinAnalyser/SkinAnalyser";
 import MyProfile from "../pages/MyProfile/MyProfile";
 import EditProfile from "../pages/EditProfile/EditProfile";
-import SkintypeResult from "../pages/SkintypeResult/SkintypeResult";
+import SkintypeResult from "../pages/SkintypePage/SkintypeResult";
+
 // error message components
 import NoMatch from "../components/NoMatch/NoMatch";
 

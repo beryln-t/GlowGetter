@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
+import SkinTypeText from "./SkinTypeText";
+import RecommendedProducts from "./RecommendedProducts";
 
-export default function SkintypeResult({ user }) {
+export default function ({ user }) {
   const [skintype, setSkintype] = useState(user);
   const [error, setError] = useState();
 
@@ -42,10 +44,15 @@ export default function SkintypeResult({ user }) {
   }
 
   return (
-    <div>
-      <h1>Your Skintype Result</h1>
-      <p>Type: {skintype.type}</p>
-      <p>Message: {skintype.message}</p>
+    <div className="hero min-h-screen bg-stone-50">
+      <div className="hero-content flex-col items-center justify-center">
+        <div>
+          <SkinTypeText skintype={skintype} />
+        </div>
+        <div>
+          <RecommendedProducts />
+        </div>
+      </div>
     </div>
   );
 }
