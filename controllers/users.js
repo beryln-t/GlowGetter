@@ -91,7 +91,7 @@ const fetchUser = async (req, res) => {
     const userId = req.params.userId;
     console.log("userId", userId);
 
-    const user = await User.findById(userId);
+    const user = await User.findById(userId).populate("skintype");
     if (!user) {
       res.status(404).json({ error: "User not found" });
       return;

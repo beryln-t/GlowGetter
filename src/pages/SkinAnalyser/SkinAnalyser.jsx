@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import IntroMsg from "./IntroMsg";
+import { getUser } from "../../utilities/users-service";
 
-export default function SkinAnalyser({ user }) {
+export default function SkinAnalyser({ user, setUser }) {
   const [questions, setQuestions] = useState([]);
   const [responseMap, setResponseMap] = useState({});
 
@@ -77,7 +78,6 @@ export default function SkinAnalyser({ user }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // console.log("response", responses);
     const responses = Object.keys(responseMap).map((id) => ({
       question: id,
       answer: responseMap[id],
@@ -94,6 +94,8 @@ export default function SkinAnalyser({ user }) {
       });
       const data = await response.json();
       console.log(data);
+      const updatedUser = await getUser();
+      setUser(updatedUser); // update the user state here
     } catch (error) {
       console.error(error);
     }
@@ -126,7 +128,6 @@ export default function SkinAnalyser({ user }) {
                         id={`${question.qnId}-yes`}
                         className="radio radio-xs checked:bg-primary"
                         value={1}
-                        // defaultChecked={responseMap[question.qnId] === 1}
                         checked={responseMap[question.qnId] === 1}
                         onChange={(e) => handleRadioChange(e, question.qnId)}
                       />
@@ -139,7 +140,6 @@ export default function SkinAnalyser({ user }) {
                         id={`${question.qnId}-no`}
                         className="radio radio-xs checked:bg-primary"
                         value={0}
-                        // defaultChecked={responseMap[question.qnId] === 0}
                         checked={responseMap[question.qnId] === 0}
                         onChange={(e) => handleRadioChange(e, question.qnId)}
                       />

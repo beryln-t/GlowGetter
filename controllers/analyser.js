@@ -50,19 +50,24 @@ const saveResponse = async (req, res) => {
       );
       console.log("question ", question);
       if (question) {
-        if (response.answer === "1") {
+        if (response.answer === 1) {
           score += question.yesScore;
-          console.log("this is the score", question.yesScore);
-        } else if (response.answer === "0") {
+        } else if (response.answer === 0) {
           score += question.noScore;
         }
       }
     }
     console.log("what score", score);
 
+    const skintype = await Skintype.findOne({
+      minScore: { $lte: score },
+      maxScore: { $gte: score },
+    });
+
     const result = await User.findByIdAndUpdate(userId, {
       analyserResponse: responseArray,
       analyserScore: score,
+      skintype: skintype ? skintype._id.toString() : null,
     });
 
     if (!result) {
