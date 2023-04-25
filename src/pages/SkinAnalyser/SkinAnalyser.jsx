@@ -5,6 +5,7 @@ import { getUser } from "../../utilities/users-service";
 export default function SkinAnalyser({ user, setUser }) {
   const [questions, setQuestions] = useState([]);
   const [responseMap, setResponseMap] = useState({});
+  const [initialResponseMap, setInitialResponseMap] = useState({});
 
   const getQuestions = async () => {
     return await fetch("/api/analyser")
@@ -49,6 +50,7 @@ export default function SkinAnalyser({ user, setUser }) {
       {}
     );
     setResponseMap(responseMap);
+    setInitialResponseMap(responseMap);
   }
 
   useEffect(() => {
@@ -64,8 +66,6 @@ export default function SkinAnalyser({ user, setUser }) {
       question: qnId,
       answer,
     };
-    // const newResponses = responses.filter((r) => r.question !== qnId);
-    // setResponses([...newResponses, newResponse]);
 
     console.log("qnid ", qnId);
     console.log("answer ", answer);
@@ -103,6 +103,11 @@ export default function SkinAnalyser({ user, setUser }) {
 
   console.log("responseMap ", responseMap);
   console.log("questions ", questions);
+
+  const handleCancel = (e) => {
+    e.preventDefault();
+    setResponseMap(initialResponseMap); // reset responseMap to initialResponseMap
+  };
 
   return (
     <div className="hero min-h-screen bg-stone-50">
@@ -149,11 +154,12 @@ export default function SkinAnalyser({ user, setUser }) {
                 </div>
               ))}
 
-              <div className="form-control mt-4 flex flex-row gap-2">
-                <button className="btn btn-primary btn-sm w-min w-24">
-                  Submit
-                </button>
-                <button className="btn btn-secondary btn-sm w-min w-24">
+              <div className="form-control mt-7 flex flex-row gap-2">
+                <button className="btn btn-primary  w-min w-24">Submit</button>
+                <button
+                  className="btn btn-secondary w-min w-24"
+                  onClick={handleCancel}
+                >
                   Cancel
                 </button>
               </div>

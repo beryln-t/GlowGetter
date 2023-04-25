@@ -1,4 +1,4 @@
-export default function LogOutAlert() {
+export default function () {
   return (
     <div className="alert alert-success flex justify-center transition-all	">
       <div>

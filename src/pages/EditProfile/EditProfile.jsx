@@ -101,7 +101,7 @@ export default function ({ user, setUser }) {
                   <input
                     type="text"
                     className="input input-bordered w-full flex-1"
-                    value={editedUser.skintype.type}
+                    value={editedUser.skintype ? editedUser.skintype.type : ""}
                     name="skintype"
                     onChange={handleChange}
                     placeholder={
@@ -112,11 +112,13 @@ export default function ({ user, setUser }) {
                     disabled
                   />
                 </div>
-                <NavLink to="/skinanalyser" className="link link-primary mb-5">
-                  Click here to take / update Skin Type Analyser
-                </NavLink>
+                <div className="mt-3">
+                  <NavLink to="/skinanalyser" className="link link-primary">
+                    Click here to take / update Skin Type Analyser
+                  </NavLink>
+                </div>
 
-                <div className="form-control mt-5 flex flex-row gap-2">
+                <div className="form-control mt-5 flex flex-row gap-2 mt-8">
                   <button className="btn btn-primary btn w-min w-24">
                     Save
                   </button>

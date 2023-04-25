@@ -53,7 +53,9 @@ export default function ({ user }) {
                   <input
                     type="text"
                     className="input input-bordered w-full flex-1"
-                    value={userProfile.skintype.type}
+                    value={
+                      userProfile.skintype ? userProfile.skintype.type : ""
+                    }
                     disabled
                     placeholder={
                       userProfile.skintype
