@@ -43,7 +43,9 @@ export default function PostSignInNB({ user, setUser }) {
                     <a>My Wishlist</a>
                   </li>
                   <li>
-                    <a>My Skin Type</a>
+                    <NavLink to={`/member/skintype/${user.skintype._id}`}>
+                      My Skin Type
+                    </NavLink>
                   </li>
                 </div>
               )}

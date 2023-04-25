@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import IntroMsg from "./IntroMsg";
 import { getUser } from "../../utilities/users-service";
+import { useNavigate } from "react-router-dom";
 
 export default function SkinAnalyser({ user, setUser }) {
+  const navigate = useNavigate();
   const [questions, setQuestions] = useState([]);
   const [responseMap, setResponseMap] = useState({});
   const [initialResponseMap, setInitialResponseMap] = useState({});
@@ -96,6 +98,7 @@ export default function SkinAnalyser({ user, setUser }) {
       console.log(data);
       const updatedUser = await getUser();
       setUser(updatedUser); // update the user state here
+      navigate(`/member/skintype/${updatedUser.skintype._id}`);
     } catch (error) {
       console.error(error);
     }

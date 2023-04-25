@@ -13,7 +13,7 @@ import SignIn from "../pages/SignIn/SignIn";
 import SkinAnalyser from "../pages/SkinAnalyser/SkinAnalyser";
 import MyProfile from "../pages/MyProfile/MyProfile";
 import EditProfile from "../pages/EditProfile/EditProfile";
-
+import SkintypeResult from "../pages/SkintypeResult/SkintypeResult";
 // error message components
 import NoMatch from "../components/NoMatch/NoMatch";
 
@@ -58,6 +58,10 @@ export default function App() {
         />
         <Route path="member">
           <Route path="myprofile" element={<MyProfile user={user} />} />
+          <Route
+            path="skintype/:userskintypeID"
+            element={<SkintypeResult user={user} />}
+          />
           <Route
             path="editprofile"
             element={<EditProfile user={user} setUser={setUser} />}
