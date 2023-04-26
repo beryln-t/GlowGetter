@@ -14,7 +14,6 @@ const productSchema = new Schema(
       required: true,
     },
     skintypes: [{ type: Schema.Types.ObjectId, ref: "Skintype" }],
-    stockists: [{ type: Schema.Types.ObjectId, ref: "Stockist", unique: true }],
   },
 
   {

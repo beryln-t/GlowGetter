@@ -1,13 +1,10 @@
 const Skintype = require("../models/Skintype");
 const User = require("../models/User");
 const Product = require("../models/Product");
-const Stockist = require("../models/Stockist");
 
 const showAllProducts = async (req, res) => {
   try {
-    const productsInCents = await Product.find()
-      .populate("stockists")
-      .populate("skintypes");
+    const productsInCents = await Product.find().populate("skintypes");
     const products = productsInCents.map((product) => ({
       ...product.toObject(),
       price: product.price / 100, // Convert price from cents to dollars
