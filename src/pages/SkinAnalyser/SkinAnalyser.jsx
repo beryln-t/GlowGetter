@@ -7,6 +7,7 @@ import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 export default function SkinAnalyser({ user, setUser }) {
   const navigate = useNavigate();
   const [questions, setQuestions] = useState([]);
+  const [numUnanswered, setNumUnanswered] = useState(questions.length);
   const [responseMap, setResponseMap] = useState({});
   const [initialResponseMap, setInitialResponseMap] = useState({});
   const [loading, setLoading] = useState(true);
@@ -54,6 +55,7 @@ export default function SkinAnalyser({ user, setUser }) {
     );
     setResponseMap(responseMap);
     setInitialResponseMap(responseMap);
+    setNumUnanswered(questionsArr.length);
     setLoading(false);
   }
 
@@ -75,10 +77,23 @@ export default function SkinAnalyser({ user, setUser }) {
       ...prevState,
       [qnId]: answer,
     }));
+
+    setNumUnanswered((prevNumUnanswered) => prevNumUnanswered - 1); // decrement numUnanswered
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // check if user has any analyserResponse
+    const hasResponse =
+      user && user.analyserResponse && user.analyserResponse.length > 0;
+
+    // check if all questions are answered
+    if (numUnanswered > 0 && !hasResponse) {
+      alert("Please answer all questions before submitting.");
+      return;
+    }
+
     const responses = Object.keys(responseMap).map((id) => ({
       question: id,
       answer: responseMap[id],
@@ -156,7 +171,10 @@ export default function SkinAnalyser({ user, setUser }) {
                 ))}
 
                 <div className="form-control mt-7 flex flex-row gap-2">
-                  <button className="btn btn-primary  w-min w-24">
+                  <button
+                    className="btn btn-primary w-min w-24"
+                    disabled={numUnanswered > 0}
+                  >
                     {user && user.analyserResponse.length === 0
                       ? "Submit"
                       : "Update"}
