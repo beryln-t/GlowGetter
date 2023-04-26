@@ -1,16 +1,28 @@
+import { useNavigate } from "react-router-dom";
+
 export default function ({ products }) {
+  const navigate = useNavigate();
+
   console.log("products ", products);
   return !products ? (
     <div> No products available </div>
   ) : (
-    <div className="flex flex-row flex-wrap max-w-custom gap-5 justify-start ">
+    <div className="flex flex-row flex-wrap max-w-custom gap-5 justify-start cursor-pointer ">
       {products.map((product) => (
         <div
           key={product._id}
           className="card flex flex-col bg-base-100 shadow-xl w-80 p-5 hover:scale-105"
+          onClick={() => {
+            navigate(`/products/productDetails/${product._id}`);
+          }}
         >
           <div className="flex flex-col items-center relative">
-            <button className="btn btn-circle btn-outline btn-error absolute left-0">
+            <button
+              className="btn btn-circle btn-outline btn-error absolute left-0"
+              onClick={(e) => {
+                e.stopPropagation();
+              }}
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-6 w-6"
