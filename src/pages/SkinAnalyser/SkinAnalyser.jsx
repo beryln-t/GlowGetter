@@ -157,7 +157,9 @@ export default function SkinAnalyser({ user, setUser }) {
 
                 <div className="form-control mt-7 flex flex-row gap-2">
                   <button className="btn btn-primary  w-min w-24">
-                    {user && user.analyserScore === null ? "Submit" : "Update"}
+                    {user && user.analyserResponse.length === 0
+                      ? "Submit"
+                      : "Update"}
                   </button>
                   <button
                     className="btn btn-secondary w-min w-24"
