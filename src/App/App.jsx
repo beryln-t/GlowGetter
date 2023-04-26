@@ -64,12 +64,18 @@ export default function App() {
           element={<SkinAnalyser user={user} setUser={setUser} />}
         />
         <Route path="products">
-          <Route path="index" element={<ProductsIndex />} />
+          <Route
+            path="index"
+            element={<ProductsIndex user={user} setUser={setUser} />}
+          />
           <Route
             path="productdetails/:productId"
-            element={<ProductDetails />}
+            element={<ProductDetails user={user} setUser={setUser} />}
           />
-          <Route path="index/*" element={<ProductsIndex />} />
+          <Route
+            path="index/*"
+            element={<ProductsIndex user={user} setUser={setUser} />}
+          />
           <Route path="*" element={<NoMatch />} />
         </Route>
 
@@ -83,7 +89,10 @@ export default function App() {
             path="editprofile"
             element={<EditProfile user={user} setUser={setUser} />}
           />
-          <Route path="wishlist" element={<WishlistIndex />} />
+          <Route
+            path="wishlist"
+            element={<WishlistIndex user={user} setUser={setUser} />}
+          />
           <Route path="*" element={<NoMatch />} />
         </Route>
         <Route path="users">

@@ -76,7 +76,7 @@ export default function ({ user }) {
       <div className="flex flex-col items-center gap-5">
         <SkinTypeText skintype={skintype} />
 
-        <RecommendedProducts products={products} />
+        <RecommendedProducts products={products} user={user} />
       </div>
     </div>
   );

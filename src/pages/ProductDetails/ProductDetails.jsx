@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 
-export default function () {
+export default function ({ user, setUser }) {
   const [product, setProduct] = useState(null);
+  const [wishlist, setWishlist] = useState([]);
   const productId = document.location.pathname.replace(
     "/products/productDetails/",
     ""
@@ -23,6 +24,51 @@ export default function () {
     };
     fetchProducts();
   }, []);
+
+  useEffect(() => {
+    const fetchWishlist = async () => {
+      try {
+        if (!user) {
+          return;
+        }
+        const response = await fetch(`/api/members/${user._id}/wishlist`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        const data = await response.json();
+        setWishlist(data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchWishlist();
+  }, []);
+
+  const isProductInWishlist = (productId) => {
+    return wishlist.some((item) => item._id === productId);
+  };
+
+  const addWishlist = async (productId) => {
+    try {
+      const response = await fetch(
+        `/api/members/${user._id}/wishlist/${productId}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ productId }),
+        }
+      );
+      const data = await response.json();
+      console.log("Added to wishlist:", data);
+      setWishlist([...wishlist, data]);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     product && (
@@ -55,24 +101,34 @@ export default function () {
               </p>
               <div className="divider"></div>
             </div>
-
-            <button className="btn btn-outline btn-error gap-2 mt-5">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
+            {user && (
+              <button
+                className={`btn ${
+                  isProductInWishlist(product._id)
+                    ? "btn-error disabled"
+                    : "btn-outline btn-error"
+                } gap-2 mt-5`}
+                onClick={(e) => {
+                  addWishlist(product._id);
+                }}
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                />
-              </svg>
-              Add to wishlist
-            </button>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                  />
+                </svg>
+                Add to wishlist
+              </button>
+            )}
           </div>
         </div>
       </div>

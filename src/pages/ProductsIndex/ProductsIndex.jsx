@@ -4,8 +4,9 @@ import { useState, useEffect } from "react";
 import { debounce } from "../../utilities/products-utility";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 
-export default function () {
+export default function ({ user, setUser }) {
   const [loading, setLoading] = useState(false);
+  const [wishlist, setWishlist] = useState([]);
   const [products, setProducts] = useState([]);
   const [conditions, setConditions] = useState({
     productName: "",
@@ -64,6 +65,53 @@ export default function () {
     navigate({ search: params.toString() ? "?" + params.toString() : "" });
   }, 300);
 
+  useEffect(() => {
+    const fetchWishlist = async () => {
+      try {
+        if (!user) {
+          return;
+        }
+        const response = await fetch(`/api/members/${user._id}/wishlist`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        const data = await response.json();
+        setWishlist(data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchWishlist();
+  }, []);
+
+  const isProductInWishlist = (productId) => {
+    return wishlist.some((item) => item._id === productId);
+  };
+
+  const addWishlist = async (productId) => {
+    try {
+      const response = await fetch(
+        `/api/members/${user._id}/wishlist/${productId}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ productId }),
+        }
+      );
+      const data = await response.json();
+      console.log("Added to wishlist:", data);
+      setWishlist([...wishlist, data]);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  console.log("products ", products);
+
   return (
     <div className="hero min-h-screen bg-stone-50 flex justify-center items-start p-5">
       <div className="flex flex-col items-center p-5">
@@ -84,27 +132,34 @@ export default function () {
                   }}
                 >
                   <div className="flex flex-col items-center relative">
-                    <button
-                      className="btn btn-circle btn-outline btn-error absolute left-0"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                      }}
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-6 w-6"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
+                    {user && (
+                      <button
+                        className={`btn btn-circle ${
+                          isProductInWishlist(product._id)
+                            ? "btn-error disabled"
+                            : "btn-outline btn-error"
+                        } absolute left-0`}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          addWishlist(product._id);
+                        }}
                       >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                        />
-                      </svg>
-                    </button>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-6 w-6"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                          />
+                        </svg>
+                      </button>
+                    )}
                     <img
                       src={product.imgurl}
                       alt="Shoes"

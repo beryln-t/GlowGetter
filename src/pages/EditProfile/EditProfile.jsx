@@ -50,6 +50,22 @@ export default function ({ user, setUser }) {
     }
   };
 
+  const addWishlist = async (productId) => {
+    try {
+      const response = await fetch(`/api/members/${user._id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ productId }),
+      });
+      const data = await response.json();
+      console.log("Added to wishlist:", data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const handleCancel = (e) => {
     e.preventDefault();
     setEditedUser(originalUser);
