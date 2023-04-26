@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import ControlBar from "./ControlBar";
 import { useState, useEffect } from "react";
 import { debounce } from "../../utilities/products-utility";
+import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 
 export default function () {
   const [loading, setLoading] = useState(false);
@@ -9,7 +10,6 @@ export default function () {
   const [conditions, setConditions] = useState({
     productName: "",
   });
-  const token = localStorage.getItem("tken");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -35,7 +35,6 @@ export default function () {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          Authorization: "Bearer " + token,
         },
       });
 
@@ -54,14 +53,25 @@ export default function () {
       ...prevState,
       productName: value,
     }));
+
+    // create a new URLSearchParams object with the updated search params
+    const params = new URLSearchParams();
+    if (value) {
+      params.set("productName", value);
+    }
+
+    // update the URL with the new search params
+    navigate({ search: params.toString() ? "?" + params.toString() : "" });
   }, 300);
 
   return (
-    <div className="hero min-h-screen bg-stone-50  flex justify-center items-start p-5">
+    <div className="hero min-h-screen bg-stone-50 flex justify-center items-start p-5">
       <div className="flex flex-col items-center p-5">
-        <ControlBar onSearchProduct={onSearchProduct} />
+        <div className="max-w-xl w-full">
+          <ControlBar onSearchProduct={onSearchProduct} />
+        </div>
         {loading ? (
-          <div>Loading...</div>
+          <LoadingSpinner />
         ) : (
           <div className="flex flex-row flex-wrap max-w-custom gap-5 justify-start cursor-pointer">
             {products.length ? (

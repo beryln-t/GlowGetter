@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 
 export default function () {
   const [product, setProduct] = useState(null);
-  const token = localStorage.getItem("token");
   const productId = document.location.pathname.replace(
     "/products/productDetails/",
     ""
@@ -14,7 +13,6 @@ export default function () {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          Authorization: "Bearer " + token,
         },
       });
       const data = await response.json();

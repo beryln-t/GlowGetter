@@ -5,10 +5,12 @@ export default {
     extend: {
       width: {
         80: "20rem",
+        400: "25rem",
         1000: "62.5rem",
       },
       maxWidth: {
         custom: "62.5rem",
+        400: "25rem",
       },
       marginRight: {
         7: "1.75rem",

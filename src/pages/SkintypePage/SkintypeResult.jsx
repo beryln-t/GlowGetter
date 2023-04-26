@@ -7,7 +7,10 @@ export default function ({ user }) {
   const [skintype, setSkintype] = useState(user);
   const [error, setError] = useState();
   const [products, setProducts] = useState();
+  const [category, setCategory] = useState("All Products");
+
   const token = localStorage.getItem("token");
+
   useEffect(() => {
     const fetchSkintype = async () => {
       if (!user) {
@@ -39,6 +42,7 @@ export default function ({ user }) {
     window.scrollTo(0, 0);
   }, [user]);
 
+  // Fetch the default products when the component mounts
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -63,6 +67,41 @@ export default function ({ user }) {
     }
   }, [skintype]);
 
+  // Update the products when the category changes
+  useEffect(() => {
+    const fetchUpdatedProducts = async () => {
+      try {
+        let url = `/api/recommendations/${skintype._id}`;
+        if (category !== "All Products") {
+          url += `/category/${category}`;
+        }
+        const response = await fetch(url, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
+          },
+        });
+        const data = await response.json();
+        if (!response.ok) {
+          throw new Error(data.error);
+        }
+        setProducts(data);
+      } catch (e) {
+        setError(e.message);
+      }
+    };
+
+    // Only fetch updated products if a category other than "All Products" is selected
+    if (category !== "All Products") {
+      fetchUpdatedProducts();
+    }
+  }, [category, skintype, token]);
+
+  const handleChange = (event) => {
+    setCategory(event.target.value);
+  };
+
   if (error) {
     return <div>{error}</div>;
   }
@@ -76,23 +115,17 @@ export default function ({ user }) {
         <SkinTypeText skintype={skintype} />
 
         <div className="flex flex-row flex-wrap my-4 ml-auto gap-5">
-          <div className="flex items-center">
-            <label className="text-sm">Sort:</label>
-            <select className="select select-bordered select-xs max-w-xs">
-              <option hidden>Select an option</option>
-              <option>All Products</option>
-              <option>Low to High</option>
-              <option>High to Low</option>
-            </select>
-          </div>
           <div className="flex items-center ">
             <label className="text-sm">Category:</label>
-            <select className="select select-bordered select-xs max-w-xs">
-              <option hidden>Select an option</option>
-              <option>All Product</option>
-              <option>Cleansers</option>
-              <option>Moisturisers</option>
-              <option>Sunscreens</option>
+            <select
+              className="select select-bordered select-xs max-w-xs"
+              value={category}
+              onChange={handleChange}
+            >
+              <option value="All Products">All Products</option>
+              <option value="Cleanser">Cleansers</option>
+              <option value="Moisturiser">Moisturisers</option>
+              <option value="Sunscreen">Sunscreens</option>
             </select>
           </div>
         </div>

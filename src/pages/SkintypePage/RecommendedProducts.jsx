@@ -5,7 +5,10 @@ export default function ({ products }) {
   ) : (
     <div className="flex flex-row flex-wrap max-w-custom gap-5 justify-start ">
       {products.map((product) => (
-        <div className="card flex flex-col bg-base-100 shadow-xl w-80 p-5 hover:scale-105">
+        <div
+          key={product._id}
+          className="card flex flex-col bg-base-100 shadow-xl w-80 p-5 hover:scale-105"
+        >
           <div className="flex flex-col items-center relative">
             <button className="btn btn-circle btn-outline btn-error absolute left-0">
               <svg
