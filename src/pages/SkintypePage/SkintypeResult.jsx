@@ -6,14 +6,14 @@ import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 export default function ({ user }) {
   const [skintype, setSkintype] = useState(user);
   const [error, setError] = useState();
-
+  const [products, setProducts] = useState();
+  const token = localStorage.getItem("token");
   useEffect(() => {
     const fetchSkintype = async () => {
       if (!user) {
         return; // exit early if user is null or undefined
       }
       try {
-        const token = localStorage.getItem("token");
         const response = await fetch(
           `/api/skintypes/${user.skintype._id}/member/${user._id}`,
           {
@@ -39,6 +39,30 @@ export default function ({ user }) {
     window.scrollTo(0, 0);
   }, [user]);
 
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch(`/api/recommendations/${skintype._id}`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
+          },
+        });
+        const data = await response.json();
+        if (!response.ok) {
+          throw new Error(data.error);
+        }
+        setProducts(data);
+      } catch (e) {
+        setError(e.message);
+      }
+    };
+    if (skintype?._id) {
+      fetchProducts();
+    }
+  }, [skintype]);
+
   if (error) {
     return <div>{error}</div>;
   }
@@ -50,6 +74,7 @@ export default function ({ user }) {
     <div className="hero min-h-screen bg-stone-50 flex justify-center items-start p-5">
       <div className="flex flex-col items-center">
         <SkinTypeText skintype={skintype} />
+
         <div className="flex flex-row flex-wrap my-4 ml-auto gap-5">
           <div className="flex items-center">
             <label className="text-sm">Sort:</label>
@@ -71,7 +96,7 @@ export default function ({ user }) {
             </select>
           </div>
         </div>
-        <RecommendedProducts />
+        <RecommendedProducts products={products} />
       </div>
     </div>
   );

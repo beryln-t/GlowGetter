@@ -2,12 +2,14 @@ import React, { useState, useEffect } from "react";
 import IntroMsg from "./IntroMsg";
 import { getUser } from "../../utilities/users-service";
 import { useNavigate } from "react-router-dom";
+import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 
 export default function SkinAnalyser({ user, setUser }) {
   const navigate = useNavigate();
   const [questions, setQuestions] = useState([]);
   const [responseMap, setResponseMap] = useState({});
   const [initialResponseMap, setInitialResponseMap] = useState({});
+  const [loading, setLoading] = useState(true);
 
   const getQuestions = async () => {
     return await fetch("/api/analyser")
@@ -52,6 +54,7 @@ export default function SkinAnalyser({ user, setUser }) {
     );
     setResponseMap(responseMap);
     setInitialResponseMap(responseMap);
+    setLoading(false);
   }
 
   useEffect(() => {
@@ -105,64 +108,68 @@ export default function SkinAnalyser({ user, setUser }) {
   };
 
   return (
-    <div className="hero min-h-screen bg-stone-50  flex justify-center items-start p-5">
+    <div className="hero min-h-screen bg-stone-50 flex justify-center items-start p-5">
       <div className="hero-content flex-col items-center justify-center">
         <IntroMsg />
-        <div className="card flex-shrink-0 w-full max-w-3xl shadow-2xl bg-base-100">
-          <div className="card-body text-slate-800">
-            <form onSubmit={handleSubmit}>
-              {questions.map((question, index) => (
-                <div key={question.qnId} className="form-control">
-                  <div className="flex flex-row items-center">
-                    <label className="label text-lg	font-semibold	">
-                      {`Qn ${index + 1}. ${question.question}`}
-                    </label>
-                    <span className="text-red-500">*</span>
-                  </div>
+        {loading ? (
+          <LoadingSpinner />
+        ) : (
+          <div className="card flex-shrink-0 w-full max-w-3xl shadow-2xl bg-base-100">
+            <div className="card-body text-slate-800">
+              <form onSubmit={handleSubmit}>
+                {questions.map((question, index) => (
+                  <div key={question.qnId} className="form-control">
+                    <div className="flex flex-row items-center">
+                      <label className="label text-lg	font-semibold	">
+                        {`Qn ${index + 1}. ${question.question}`}
+                      </label>
+                      <span className="text-red-500">*</span>
+                    </div>
 
-                  <div className="radio-options flex flex-col gap-2">
-                    <label className="radio-option cursor-pointer flex items-center content-center gap-1">
-                      <input
-                        type="radio"
-                        name={question.qnId}
-                        id={`${question.qnId}-yes`}
-                        className="radio radio-xs checked:bg-primary"
-                        value={1}
-                        checked={responseMap[question.qnId] === 1}
-                        onChange={(e) => handleRadioChange(e, question.qnId)}
-                      />
-                      <span className="radio-option-text ">Yes</span>
-                    </label>
-                    <label className="radio-option cursor-pointer flex items-center content-center gap-1">
-                      <input
-                        type="radio"
-                        name={question.qnId}
-                        id={`${question.qnId}-no`}
-                        className="radio radio-xs checked:bg-primary"
-                        value={0}
-                        checked={responseMap[question.qnId] === 0}
-                        onChange={(e) => handleRadioChange(e, question.qnId)}
-                      />
-                      <span className="radio-option-text">No</span>
-                    </label>
+                    <div className="radio-options flex flex-col gap-2">
+                      <label className="radio-option cursor-pointer flex items-center content-center gap-1">
+                        <input
+                          type="radio"
+                          name={question.qnId}
+                          id={`${question.qnId}-yes`}
+                          className="radio radio-xs checked:bg-primary"
+                          value={1}
+                          checked={responseMap[question.qnId] === 1}
+                          onChange={(e) => handleRadioChange(e, question.qnId)}
+                        />
+                        <span className="radio-option-text ">Yes</span>
+                      </label>
+                      <label className="radio-option cursor-pointer flex items-center content-center gap-1">
+                        <input
+                          type="radio"
+                          name={question.qnId}
+                          id={`${question.qnId}-no`}
+                          className="radio radio-xs checked:bg-primary"
+                          value={0}
+                          checked={responseMap[question.qnId] === 0}
+                          onChange={(e) => handleRadioChange(e, question.qnId)}
+                        />
+                        <span className="radio-option-text">No</span>
+                      </label>
+                    </div>
                   </div>
+                ))}
+
+                <div className="form-control mt-7 flex flex-row gap-2">
+                  <button className="btn btn-primary  w-min w-24">
+                    {user && user.analyserScore === null ? "Submit" : "Update"}
+                  </button>
+                  <button
+                    className="btn btn-secondary w-min w-24"
+                    onClick={handleCancel}
+                  >
+                    Cancel
+                  </button>
                 </div>
-              ))}
-
-              <div className="form-control mt-7 flex flex-row gap-2">
-                <button className="btn btn-primary  w-min w-24">
-                  {user && user.analyserScore === null ? "Submit" : "Update"}
-                </button>
-                <button
-                  className="btn btn-secondary w-min w-24"
-                  onClick={handleCancel}
-                >
-                  Cancel
-                </button>
-              </div>
-            </form>
+              </form>
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );

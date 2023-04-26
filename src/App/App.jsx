@@ -65,7 +65,7 @@ export default function App() {
         />
         <Route path="products">
           <Route path="index" element={<ProductsIndex />} />
-          <Route path="test" element={<ProductDetails />} />
+          <Route path="products/:productId" element={<ProductDetails />} />
           <Route path="*" element={<NoMatch />} />
         </Route>
 
