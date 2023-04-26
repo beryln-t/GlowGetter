@@ -44,7 +44,7 @@ export default function ({ user }) {
 
   return (
     <div className="hero min-h-screen bg-stone-50">
-      <div className="flex flex-col justify-center items-center">
+      <div className="flex flex-col justify-center items-center p-5">
         <SkinTypeText skintype={skintype} />
         <RecommendedProducts />
       </div>
