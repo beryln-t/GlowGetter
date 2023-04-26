@@ -1,4 +1,5 @@
 const User = require("../models/User");
+const Product = require("../models/Product");
 
 const editProfile = async (req, res) => {
   try {
