@@ -8,7 +8,7 @@ export default function ({ skintype }) {
           Your Skin type is: <span className="italic">{skintype.type}</span>
         </h1>
         <p className="pt-6 mb-0 text-justify">{skintype.message}</p>
-        <div className="divider"></div>
+        <div className="divider mb-0"></div>
       </div>
     </div>
   );
