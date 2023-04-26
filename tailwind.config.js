@@ -13,6 +13,9 @@ export default {
       marginRight: {
         7: "1.75rem",
       },
+      fontSize: {
+        xxs: "0.625rem",
+      },
     },
   },
   plugins: [require("@tailwindcss/typography"), require("daisyui")],

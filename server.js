@@ -11,6 +11,7 @@ const analyserRouter = require("./routes/analyser");
 const skintypeRouter = require("./routes/skintypes");
 const membersRouter = require("./routes/members");
 const recommendationsRouter = require("./routes/recommendations");
+const productsRouter = require("./routes/products");
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -26,6 +27,7 @@ app.use("/api/analyser", analyserRouter);
 app.use("/api/skintypes", skintypeRouter);
 app.use("/api/members", membersRouter);
 app.use("/api/recommendations", recommendationsRouter);
+app.use("/api/products", productsRouter);
 
 app.get("/api", (req, res) => {
   res.send("Hi!");

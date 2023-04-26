@@ -14,6 +14,9 @@ import SkinAnalyser from "../pages/SkinAnalyser/SkinAnalyser";
 import MyProfile from "../pages/MyProfile/MyProfile";
 import EditProfile from "../pages/EditProfile/EditProfile";
 import SkintypeResult from "../pages/SkintypePage/SkintypeResult";
+import ProductsIndex from "../pages/ProductsIndex/ProductsIndex";
+import ProductDetails from "../pages/ProductDetails/ProductDetails";
+import WishlistIndex from "../pages/WishlistIndex/WishlistIndex";
 
 // error message components
 import NoMatch from "../components/NoMatch/NoMatch";
@@ -60,6 +63,12 @@ export default function App() {
           path="skinanalyser"
           element={<SkinAnalyser user={user} setUser={setUser} />}
         />
+        <Route path="products">
+          <Route path="index" element={<ProductsIndex />} />
+          <Route path="test" element={<ProductDetails />} />
+          <Route path="*" element={<NoMatch />} />
+        </Route>
+
         <Route path="member">
           <Route path="myprofile" element={<MyProfile user={user} />} />
           <Route
@@ -70,6 +79,8 @@ export default function App() {
             path="editprofile"
             element={<EditProfile user={user} setUser={setUser} />}
           />
+          <Route path="wishlist" element={<WishlistIndex />} />
+          <Route path="*" element={<NoMatch />} />
         </Route>
         <Route path="users">
           <Route

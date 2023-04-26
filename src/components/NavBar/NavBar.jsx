@@ -43,7 +43,7 @@ export default function NavBar({ loading, user, setUser }) {
               </NavLink>
             </li>
             <li>
-              <a>Browse Products</a>
+              <NavLink to="/products/index">Browse Products</NavLink>
             </li>
           </ul>
         </div>
@@ -58,7 +58,7 @@ export default function NavBar({ loading, user, setUser }) {
             <NavLink to="/skinanalyser">Skin Type Analyser</NavLink>
           </li>
           <li>
-            <a>Browse Products</a>
+            <NavLink to="/products/index">Browse Products</NavLink>
           </li>
         </ul>
       </div>

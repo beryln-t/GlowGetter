@@ -45,7 +45,7 @@ export default function PostSignInNB({ user, setUser }) {
                     <NavLink to="/member/myprofile">My Profile</NavLink>
                   </li>
                   <li>
-                    <a>My Wishlist</a>
+                    <NavLink to="/member/wishlist">My Wishlist</NavLink>
                   </li>
                   <li>
                     <NavLink to={getNavLink}>My Skin Type</NavLink>

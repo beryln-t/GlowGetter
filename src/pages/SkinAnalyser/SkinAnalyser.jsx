@@ -105,7 +105,7 @@ export default function SkinAnalyser({ user, setUser }) {
   };
 
   return (
-    <div className="hero min-h-screen bg-stone-50">
+    <div className="hero min-h-screen bg-stone-50  flex justify-center items-start p-5">
       <div className="hero-content flex-col items-center justify-center">
         <IntroMsg />
         <div className="card flex-shrink-0 w-full max-w-3xl shadow-2xl bg-base-100">

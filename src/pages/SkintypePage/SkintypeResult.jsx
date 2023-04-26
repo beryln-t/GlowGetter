@@ -47,10 +47,10 @@ export default function ({ user }) {
   }
 
   return (
-    <div className="hero min-h-screen bg-stone-50">
-      <div className="flex flex-col items-center p-5">
+    <div className="hero min-h-screen bg-stone-50 flex justify-center items-start p-5">
+      <div className="flex flex-col items-center">
         <SkinTypeText skintype={skintype} />
-        <div className="flex flex-row my-4 ml-auto mr-5 gap-5">
+        <div className="flex flex-row flex-wrap my-4 ml-auto gap-5">
           <div className="flex items-center">
             <label className="text-sm">Sort:</label>
             <select className="select select-bordered select-xs max-w-xs">
