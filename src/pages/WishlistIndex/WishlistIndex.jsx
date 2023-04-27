@@ -83,7 +83,12 @@ export default function ({ user, product }) {
                       <div className="text-2xl font-normal truncate">
                         {item.productName}
                       </div>
-                      <div className="text-xl font-light">{item.price}</div>
+                      <div className="text-xl font-light">
+                        {item.price.toLocaleString("en-US", {
+                          style: "currency",
+                          currency: "SGD",
+                        })}
+                      </div>
                     </td>
                     <td className="space-y-3">
                       <div>
