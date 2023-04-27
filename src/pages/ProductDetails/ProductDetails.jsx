@@ -63,7 +63,6 @@ export default function ({ user, setUser }) {
         }
       );
       const data = await response.json();
-      console.log("Added to wishlist:", data);
       setWishlist([...wishlist, data]);
     } catch (error) {
       console.error(error);

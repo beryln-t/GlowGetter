@@ -103,14 +103,11 @@ export default function ({ user, setUser }) {
         }
       );
       const data = await response.json();
-      console.log("Added to wishlist:", data);
       setWishlist([...wishlist, data]);
     } catch (error) {
       console.error(error);
     }
   };
-
-  console.log("products ", products);
 
   return (
     <div className="hero min-h-screen bg-stone-50 flex justify-center items-start p-5">

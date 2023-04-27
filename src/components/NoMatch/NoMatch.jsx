@@ -1,4 +1,4 @@
-export default function NoMatch() {
+export default function () {
   return (
     <div className="alert alert-error shadow-lg mx-auto flex justify-center transition">
       <div className="flex items-center">

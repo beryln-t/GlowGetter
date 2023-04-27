@@ -6,7 +6,6 @@ const { response } = require("express");
 const showQns = async (req, res) => {
   try {
     const analyser = await Analyser.find({});
-    console.log(analyser);
     res.status(200).json(analyser);
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -23,7 +22,7 @@ const getUserResponse = async (req, res) => {
     const response = {
       name: user.name,
       _id: user._id,
-      analyserResponse: user.analyserResponse || [], // Check if analyserResponse is null or undefined
+      analyserResponse: user.analyserResponse || [],
     };
     res.status(200).json(response);
   } catch (error) {
@@ -35,7 +34,6 @@ const saveResponse = async (req, res) => {
   try {
     const userId = req.params.userId;
     const responses = req.body;
-    console.log("responses ", responses);
     const responseArray = responses.map((response) => ({
       question: response.question,
       answer: response.answer,
@@ -43,12 +41,10 @@ const saveResponse = async (req, res) => {
 
     let score = 0;
     const analysers = await Analyser.find({});
-    console.log("analysers ", analysers);
     for (const response of responseArray) {
       const question = analysers.find(
         (analyser) => analyser._id.toString() === response.question
       );
-      console.log("question ", question);
       if (question) {
         if (response.answer === 1) {
           score += question.yesScore;
@@ -57,7 +53,6 @@ const saveResponse = async (req, res) => {
         }
       }
     }
-    console.log("what score", score);
 
     const skintype = await Skintype.findOne({
       minScore: { $lte: score },

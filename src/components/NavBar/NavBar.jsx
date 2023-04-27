@@ -11,7 +11,7 @@ export default function NavBar({ loading, user, setUser }) {
     user ? <PostSignInNB user={user} setUser={setUser} /> : <PreSignInNB />;
 
   return (
-    <div className="navbar sticky top-0 z-50 bg-slate-300 px-5">
+    <div className="navbar sticky top-0 z-50 bg-slate-300 px-3">
       <div className="navbar-start text-slate-700">
         <div className="dropdown text-slate-700">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">

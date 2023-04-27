@@ -1,6 +1,6 @@
 export default function () {
   return (
-    <div className="alert alert-error shadow-lg mx-auto flex justify-center">
+    <div className="alert alert-error shadow-lg mx-auto flex justify-center transition">
       <div className="flex items-center">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -15,10 +15,9 @@ export default function () {
             d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
           />
         </svg>
-        <span className="ml-2 text-center ">
-          401. That's an error! You are not authorized to access this resource.
-          Please provide valid credentials to authenticate yourself and try
-          again.
+        <span className="ml-2 text-center">
+          No skin type recorded. Please take skin type analyser to view
+          recommended products.
         </span>
       </div>
     </div>

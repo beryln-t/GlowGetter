@@ -42,14 +42,12 @@ export default function ({ products, user }) {
         }
       );
       const data = await response.json();
-      console.log("Added to wishlist:", data);
       setWishlist([...wishlist, data]);
     } catch (error) {
       console.error(error);
     }
   };
 
-  console.log("products ", products);
   return !products ? (
     <div> No products available </div>
   ) : (

@@ -7,7 +7,6 @@ const editProfile = async (req, res) => {
     const { name, email } = req.body;
 
     const user = await User.findById(userId);
-    console.log("user ", user);
     if (user.email !== email) {
       // Check if email is already taken
       let emailExists = await User.exists({ email });
@@ -22,7 +21,6 @@ const editProfile = async (req, res) => {
       { name, email },
       { new: true }
     );
-    console.log("updated user ", updatedUser);
 
     res.status(200).json(updatedUser);
   } catch (error) {
