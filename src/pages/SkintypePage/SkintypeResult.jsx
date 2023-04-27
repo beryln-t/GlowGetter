@@ -16,7 +16,6 @@ export default function ({ user }) {
         return; // exit early if user is null or undefined
       }
       try {
-        const token = localStorage.getItem("token");
         const response = await fetch(
           `/api/skintypes/${user.skintype._id}/member/${user._id}`,
           {

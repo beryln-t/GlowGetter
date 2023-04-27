@@ -13,10 +13,12 @@ export default function ({ user, product }) {
       if (!user) {
         return;
       }
+      const token = localStorage.getItem("token");
       const response = await fetch(`/api/members/${user._id}/wishlist`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
         },
       });
       const data = await response.json();
@@ -33,12 +35,14 @@ export default function ({ user, product }) {
   };
 
   const handleRemoveClick = async (productId) => {
+    const token = localStorage.getItem("token");
     const response = await fetch(
       `/api/members/${user._id}/wishlist/${productId}`,
       {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
         },
       }
     );
