@@ -6,24 +6,24 @@ GlowGetter is an app developed with newbies to skincare in mind. Getting glowy s
 
 ## App Screenshots
 
-<p align="center"><img src="https://files.slack.com/files-tmb/T0351JZQ0-F0553GZTY13-fd9bb1c359/screenshot_2023-04-27_at_3.47.39_pm_720.png" width="50%" height="50%"> </p>
+<p align="center"><img src="https://imgur.com/boMU6HV" width="50%" height="50%"> </p>
  <p align="center">[Home Screen]</p>
 
-<p align="center"><img src="https://files.slack.com/files-tmb/T0351JZQ0-F0556FBVAPL-792c8cdf3a/screenshot_2023-04-27_at_3.46.42_pm_720.png" width="50%" height="50%"> </p>
+<p align="center"><img src="https://i.imgur.com/kxinnPb.png" width="50%" height="50%"> </p>
  <p align="center">[Skin Type Analyser]</p>
 
-<p align="center"><img src="https://files.slack.com/files-tmb/T0351JZQ0-F054ZSVSEPQ-4d06035e36/screenshot_2023-04-27_at_3.47.06_pm_720.png" width="50%" height="50%"> </p>
+<p align="center"><img src="https://i.imgur.com/OmWfoMH.png" width="50%" height="50%"> </p>
  <p align="center">[Skin type and recommendations]</p>
 
- <p align="center"><img src="https://files.slack.com/files-tmb/T0351JZQ0-F055W674QSU-1c8ad058c2/screenshot_2023-04-27_at_3.46.14_pm_720.png" width="50%" height="50%"> </p>
+ <p align="center"><img src="https://i.imgur.com/bIqzZnh.png" width="50%" height="50%"> </p>
  <p align="center">[Wishlist]</p>
 
 ## Data Model
 
-<p align="center"><img src="https://files.slack.com/files-pri/T0351JZQ0-F05566XAEBD/screenshot_2023-04-27_at_3.15.44_pm.png" width="50%" height="50%"> </p>
+<p align="center"><img src="https://i.imgur.com/h5m9s83.png" width="50%" height="50%"> </p>
  <p align="center">[Data Model]</p>
  <br>
- The data model consist of 4 collections 
+ The data model consists of 4 collections 
  -User
  -Product
  -Analyser
@@ -41,7 +41,7 @@ GlowGetter is an app developed with newbies to skincare in mind. Getting glowy s
 
 - User
 - Products
-- Analyser, analyser results, recomendations
+- Analyser, analyser results, recommendations
 - Wishlist
 
 ### Update
@@ -79,7 +79,7 @@ GlowGetter is an app developed with newbies to skincare in mind. Getting glowy s
 
 ### 2. scalability
 
-Scalability was taken into consideration during development of project. For instance instead of setting value for quiz as "Yes" and "No", numbers are used instead to allow for easily adding more question options in the future.
+Scalability was taken into consideration during development of project. For instance instead of setting the value for quiz as "Yes" and "No", numbers are used instead to allow for easily adding more question options in the future.
 
 ```javascript
     analyserResponse: [
@@ -104,7 +104,7 @@ Scalability was taken into consideration during development of project. For inst
 - Backend search function
 - Loading icon when content renders
 - Trying to set up log in
-- Using of libraries like Yup and Formik
+- Using libraries like Yup and Formik
 - Creating a wishlist tagged to user which I've not tried before.
 
 ## Challenges
@@ -116,12 +116,13 @@ Scalability was taken into consideration during development of project. For inst
 
 ## Future Enhancements and Developments
 
+- Adding more filter/sort functions for better browsing experience
 - Adding admin controls to manage products
 - Adding a stockist feature to allow users to see where products are stocked
-- Adding a review/forum feature to make it a more community based platform
+- Adding a review/forum feature to make it a more community-based platform
 - "Cleaning up" code to make code more efficient and readable, especially more consistency in terms of use of tailwind classes.
 
-### References/Sorces
+### References/Sources
 
 The following assets used in the project do not belong to me. All rights belong to the original artists and creators.
 
