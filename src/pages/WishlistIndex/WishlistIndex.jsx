@@ -45,7 +45,6 @@ export default function ({ user, product }) {
     if (response.ok) {
       setWishlist(wishlist.filter((item) => item._id !== productId));
     }
-    fetchWishlist();
   };
 
   return (
