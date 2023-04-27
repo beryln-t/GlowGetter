@@ -58,7 +58,10 @@ export default function SkinAnalyser({ user, setUser }) {
     setInitialResponseMap(responseMap);
     setNumUnanswered(questionsArr.length);
     setLoading(false);
-    window.scrollTo(0, 0);
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
     setHasResponse(
       responseRes.analyserResponse && responseRes.analyserResponse.length > 0
     );
@@ -125,7 +128,10 @@ export default function SkinAnalyser({ user, setUser }) {
   const handleCancel = (e) => {
     e.preventDefault();
     setResponseMap(initialResponseMap);
-    window.scrollTo(0, 0);
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   };
 
   return (

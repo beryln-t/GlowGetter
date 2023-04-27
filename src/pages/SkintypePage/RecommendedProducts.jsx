@@ -6,23 +6,24 @@ export default function ({ products, user }) {
   const [wishlist, setWishlist] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
 
+  const fetchWishlist = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await fetch(`/api/members/${user._id}/wishlist`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+      });
+      const data = await response.json();
+      setWishlist(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   useEffect(() => {
-    const fetchWishlist = async () => {
-      try {
-        const token = localStorage.getItem("token");
-        const response = await fetch(`/api/members/${user._id}/wishlist`, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: "Bearer " + token,
-          },
-        });
-        const data = await response.json();
-        setWishlist(data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
     fetchWishlist();
   }, [user._id]);
 
@@ -32,13 +33,13 @@ export default function ({ products, user }) {
 
   const addWishlist = async (productId) => {
     try {
-      if (isProductInWishlist(productId)) {
-        setErrorMessage("Product is already in wishlist.");
-        setTimeout(() => {
-          setErrorMessage("");
-        }, 2000);
-        return;
-      }
+      // if (isProductInWishlist(productId)) {
+      //   setErrorMessage("Product is already in wishlist.");
+      //   setTimeout(() => {
+      //     setErrorMessage("");
+      //   }, 2000);
+      //   return;
+      // }
       const token = localStorage.getItem("token");
       const response = await fetch(
         `/api/members/${user._id}/wishlist/${productId}`,
@@ -51,8 +52,9 @@ export default function ({ products, user }) {
           body: JSON.stringify({ productId }),
         }
       );
-      const data = await response.json();
-      setWishlist([...wishlist, data]);
+      if (response.ok) {
+        await fetchWishlist();
+      }
     } catch (error) {
       console.error(error);
     }

@@ -26,28 +26,29 @@ export default function ({ user, setUser }) {
     fetchProducts();
   }, []);
 
-  useEffect(() => {
-    const fetchWishlist = async () => {
-      try {
-        if (!user) {
-          return;
-        }
-        const token = localStorage.getItem("token");
-        const response = await fetch(`/api/members/${user._id}/wishlist`, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: "Bearer " + token,
-          },
-        });
-        const data = await response.json();
-        setWishlist(data);
-      } catch (error) {
-        console.error(error);
+  const fetchWishlist = async () => {
+    try {
+      if (!user) {
+        return;
       }
-    };
+      const token = localStorage.getItem("token");
+      const response = await fetch(`/api/members/${user._id}/wishlist`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+      });
+      const data = await response.json();
+      setWishlist(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
     fetchWishlist();
-  }, []);
+  }, [user]);
 
   const isProductInWishlist = (productId) => {
     return wishlist.some((item) => item._id === productId);
@@ -55,13 +56,6 @@ export default function ({ user, setUser }) {
 
   const addWishlist = async (productId) => {
     try {
-      if (isProductInWishlist(productId)) {
-        setErrorMessage("Product is already in wishlist.");
-        setTimeout(() => {
-          setErrorMessage("");
-        }, 2000);
-        return;
-      }
       const token = localStorage.getItem("token");
 
       const response = await fetch(
@@ -75,8 +69,9 @@ export default function ({ user, setUser }) {
           body: JSON.stringify({ productId }),
         }
       );
-      const data = await response.json();
-      setWishlist([...wishlist, data]);
+      if (response.ok) {
+        await fetchWishlist();
+      }
     } catch (error) {
       console.error(error);
     }

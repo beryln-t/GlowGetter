@@ -32,13 +32,14 @@ const addWishlist = async (req, res) => {
     }
 
     const user = await User.findById(userId);
-    if (user.wishlist.includes(productId)) {
-      return res.status(400).json({ error: "Product already in wishlist" });
-    }
 
+    // Delete wishlist if it exists or add wishlist if it doesn't exist
+    const command = user.wishlist.includes(productId) ? "$pull" : "$push";
+
+    // Add wishlist if it doesn't exists
     const updatedUser = await User.findByIdAndUpdate(
       userId,
-      { $push: { wishlist: productId } },
+      { [command]: { wishlist: productId } },
       { new: true }
     );
 

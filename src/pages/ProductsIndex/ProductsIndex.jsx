@@ -7,6 +7,7 @@ import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 export default function ({ user, setUser }) {
   const [loading, setLoading] = useState(false);
   const [wishlist, setWishlist] = useState([]);
+  const [wishlistMap, setWishlistMap] = useState({});
   const [products, setProducts] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -45,7 +46,10 @@ export default function ({ user, setUser }) {
       if (data) {
         setProducts(data);
         setLoading(false);
-        window.scrollTo(0, 0);
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
       }
     };
     fetchProducts();
@@ -68,43 +72,42 @@ export default function ({ user, setUser }) {
     navigate({ search: params.toString() ? "?" + params.toString() : "" });
   }, 300);
 
-  useEffect(() => {
-    const fetchWishlist = async () => {
-      try {
-        if (!user) {
-          return;
-        }
-        const token = localStorage.getItem("token");
-
-        const response = await fetch(`/api/members/${user._id}/wishlist`, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: "Bearer " + token,
-          },
-        });
-        const data = await response.json();
-        setWishlist(data);
-      } catch (error) {
-        console.error(error);
+  const fetchWishlist = async () => {
+    try {
+      if (!user) {
+        return;
       }
-    };
-    fetchWishlist();
-  }, []);
+      const token = localStorage.getItem("token");
 
-  const isProductInWishlist = (productId) => {
-    return wishlist.some((item) => item._id === productId);
+      const response = await fetch(`/api/members/${user._id}/wishlist`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+      });
+      const data = await response.json();
+      setWishlist(data);
+      setWishlistMap(
+        data.reduce(
+          (prev, cur) => ({
+            ...prev,
+            [cur._id]: true,
+          }),
+          {}
+        )
+      );
+    } catch (error) {
+      console.error(error);
+    }
   };
+
+  useEffect(() => {
+    fetchWishlist();
+  }, [user]);
 
   const addWishlist = async (productId) => {
     try {
-      if (isProductInWishlist(productId)) {
-        setErrorMessage("Product is already in wishlist.");
-        setTimeout(() => {
-          setErrorMessage("");
-        }, 2000);
-        return;
-      }
       const token = localStorage.getItem("token");
       const response = await fetch(
         `/api/members/${user._id}/wishlist/${productId}`,
@@ -117,12 +120,15 @@ export default function ({ user, setUser }) {
           body: JSON.stringify({ productId }),
         }
       );
-      const data = await response.json();
-      setWishlist([...wishlist, data]);
+      console.log("response ", response);
+      if (response.ok) {
+        await fetchWishlist();
+      }
     } catch (error) {
       console.error(error);
     }
   };
+  console.log("wishlistmap ", wishlistMap);
   return (
     <div className="hero min-h-screen bg-stone-50 flex justify-center items-start p-5">
       <div className="flex flex-col items-center p-5">
@@ -149,13 +155,13 @@ export default function ({ user, setUser }) {
                     {user && (
                       <button
                         className={`btn btn-circle ${
-                          isProductInWishlist(product._id)
+                          wishlistMap[product._id]
                             ? "btn-error disabled"
                             : "btn-outline btn-error"
                         } absolute left-0`}
-                        onClick={(e) => {
+                        onClick={async (e) => {
                           e.stopPropagation();
-                          addWishlist(product._id);
+                          await addWishlist(product._id);
                         }}
                       >
                         <svg

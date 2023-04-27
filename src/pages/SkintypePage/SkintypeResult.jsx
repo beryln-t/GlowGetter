@@ -38,7 +38,10 @@ export default function ({ user }) {
     fetchSkintype();
 
     // Scroll to the top of the page when the component mounts
-    window.scrollTo(0, 0);
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   }, [user]);
 
   useEffect(() => {
