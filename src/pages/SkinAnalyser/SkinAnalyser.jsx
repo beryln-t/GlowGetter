@@ -11,6 +11,7 @@ export default function SkinAnalyser({ user, setUser }) {
   const [responseMap, setResponseMap] = useState({});
   const [initialResponseMap, setInitialResponseMap] = useState({});
   const [loading, setLoading] = useState(true);
+  const [hasResponse, setHasResponse] = useState(true);
 
   const getQuestions = async () => {
     return await fetch("/api/analyser")
@@ -58,6 +59,9 @@ export default function SkinAnalyser({ user, setUser }) {
     setNumUnanswered(questionsArr.length);
     setLoading(false);
     window.scrollTo(0, 0);
+    setHasResponse(
+      responseRes.analyserResponse && responseRes.analyserResponse.length > 0
+    );
   }
 
   useEffect(() => {
@@ -175,7 +179,7 @@ export default function SkinAnalyser({ user, setUser }) {
                 <div className="form-control mt-7 flex flex-row gap-2">
                   <button
                     className="btn btn-primary w-min w-24"
-                    disabled={numUnanswered > 0}
+                    disabled={numUnanswered > 0 && !hasResponse}
                   >
                     {user && user.analyserResponse.length === 0
                       ? "Submit"
