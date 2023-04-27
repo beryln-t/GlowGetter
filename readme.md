@@ -6,21 +6,21 @@ GlowGetter is an app developed with newbies to skincare in mind. Getting glowy s
 
 ## App Screenshots
 
-<p align="center"><img src="https://imgur.com/boMU6HV" width="50%" height="50%"> </p>
+<p align="center"><img src="https://i.imgur.com/boMU6HV.jpg" width="70%" height="70%"> </p>
  <p align="center">[Home Screen]</p>
 
-<p align="center"><img src="https://i.imgur.com/kxinnPb.png" width="50%" height="50%"> </p>
+<p align="center"><img src="https://i.imgur.com/kxinnPb.png" width="70%" height="70%"> </p>
  <p align="center">[Skin Type Analyser]</p>
 
-<p align="center"><img src="https://i.imgur.com/OmWfoMH.png" width="50%" height="50%"> </p>
+<p align="center"><img src="https://i.imgur.com/OmWfoMH.png" width="70%" height="70%"> </p>
  <p align="center">[Skin type and recommendations]</p>
 
- <p align="center"><img src="https://i.imgur.com/bIqzZnh.png" width="50%" height="50%"> </p>
+ <p align="center"><img src="https://i.imgur.com/bIqzZnh.png" width="70%" height="70%"> </p>
  <p align="center">[Wishlist]</p>
 
 ## Data Model
 
-<p align="center"><img src="https://i.imgur.com/h5m9s83.png" width="50%" height="50%"> </p>
+<p align="center"><img src="https://i.imgur.com/h5m9s83.png" width="70%" height="70%"> </p>
  <p align="center">[Data Model]</p>
  <br>
  The data model consists of 4 collections 
