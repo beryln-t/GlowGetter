@@ -71,7 +71,10 @@ GlowGetter is an app developed with newbies to skincare in mind. Getting glowy s
 
 ### 1. Mobile Responsiveness
 
-<p align="center"><img src="https://files.slack.com/files-pri/T0351JZQ0-F0556AS6S90/screenshot_20230427_114540_chrome.jpg" width="50%" height="50%"> </p>
+<p align="center"><img src="https://i.imgur.com/lLATJI4.jpg" width="50%" height="50%"> </p>
+ <p align="center">[Website on mobile browser]</p>
+ <br>
+ <p align="center"><img src="https://i.imgur.com/Wc3Q9BL.jpg" width="50%" height="50%"> </p>
  <p align="center">[Website on mobile browser]</p>
 
 ### 2. scalability
