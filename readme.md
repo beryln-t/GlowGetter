@@ -116,6 +116,7 @@ Scalability was taken into consideration during development of project. For inst
 
 ## Future Enhancements and Developments
 
+- Allow non-members to do the quiz by exploring storing of data in local storage
 - Adding more filter/sort functions for better browsing experience
 - Adding admin controls to manage products
 - Adding a stockist feature to allow users to see where products are stocked
