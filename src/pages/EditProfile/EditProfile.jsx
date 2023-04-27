@@ -33,7 +33,6 @@ export default function ({ user, setUser }) {
         },
         body: JSON.stringify({
           name: editedUser.name,
-          email: editedUser.email,
         }),
       });
       if (!response.ok) {
@@ -85,10 +84,11 @@ export default function ({ user, setUser }) {
                   </label>
                   <input
                     type="text"
-                    className="input input-bordered w-full flex-1"
+                    className="input input-bordered w-full flex-1 "
                     value={editedUser.email}
                     name="email"
                     onChange={handleChange}
+                    disabled
                   />
                 </div>
                 <div className="mt-0">

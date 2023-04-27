@@ -4,21 +4,13 @@ const Product = require("../models/Product");
 const editProfile = async (req, res) => {
   try {
     const userId = req.params.userId;
-    const { name, email } = req.body;
+    const { name } = req.body;
 
     const user = await User.findById(userId);
-    if (user.email !== email) {
-      // Check if email is already taken
-      let emailExists = await User.exists({ email });
-      if (emailExists) {
-        return res.status(400).json({ error: "Email taken" });
-      }
-    }
 
-    // Update user
     const updatedUser = await User.findByIdAndUpdate(
       userId,
-      { name, email },
+      { name },
       { new: true }
     );
 
