@@ -8,6 +8,8 @@ export default function ({ user, setUser }) {
   const [loading, setLoading] = useState(false);
   const [wishlist, setWishlist] = useState([]);
   const [products, setProducts] = useState([]);
+  const [errorMessage, setErrorMessage] = useState("");
+
   const [conditions, setConditions] = useState({
     productName: "",
   });
@@ -43,6 +45,7 @@ export default function ({ user, setUser }) {
       if (data) {
         setProducts(data);
         setLoading(false);
+        window.scrollTo(0, 0);
       }
     };
     fetchProducts();
@@ -92,6 +95,13 @@ export default function ({ user, setUser }) {
 
   const addWishlist = async (productId) => {
     try {
+      if (isProductInWishlist(productId)) {
+        setErrorMessage("Product is already in wishlist.");
+        setTimeout(() => {
+          setErrorMessage("");
+        }, 2000);
+        return;
+      }
       const response = await fetch(
         `/api/members/${user._id}/wishlist/${productId}`,
         {
@@ -108,13 +118,15 @@ export default function ({ user, setUser }) {
       console.error(error);
     }
   };
-
   return (
     <div className="hero min-h-screen bg-stone-50 flex justify-center items-start p-5">
       <div className="flex flex-col items-center p-5">
         <div className="max-w-xl w-full">
           <ControlBar onSearchProduct={onSearchProduct} />
         </div>
+        {errorMessage && (
+          <div className="alert alert-error shadow-lg">{errorMessage}</div>
+        )}
         {loading ? (
           <LoadingSpinner />
         ) : (

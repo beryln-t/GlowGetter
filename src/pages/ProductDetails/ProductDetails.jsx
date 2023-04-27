@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 export default function ({ user, setUser }) {
   const [product, setProduct] = useState(null);
   const [wishlist, setWishlist] = useState([]);
+  const [errorMessage, setErrorMessage] = useState("");
   const productId = document.location.pathname.replace(
     "/products/productDetails/",
     ""
@@ -52,6 +53,13 @@ export default function ({ user, setUser }) {
 
   const addWishlist = async (productId) => {
     try {
+      if (isProductInWishlist(productId)) {
+        setErrorMessage("Product is already in wishlist.");
+        setTimeout(() => {
+          setErrorMessage("");
+        }, 2000);
+        return;
+      }
       const response = await fetch(
         `/api/members/${user._id}/wishlist/${productId}`,
         {
@@ -73,6 +81,9 @@ export default function ({ user, setUser }) {
     product && (
       <div className="hero min-h-screen bg-stone-50 flex flex-row flex-wrap justify-center items-center p-10">
         <div className="hero-content flex-row flex-wrap items-center justify-center gap-7 w-full">
+          {errorMessage && (
+            <div className="alert alert-error shadow-lg">{errorMessage}</div>
+          )}
           <img
             src={product.imgurl}
             className="max-w-sm rounded-lg shadow-xl "

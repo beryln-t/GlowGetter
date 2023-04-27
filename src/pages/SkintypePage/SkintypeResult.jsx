@@ -7,6 +7,8 @@ export default function ({ user }) {
   const [skintype, setSkintype] = useState(user);
   const [error, setError] = useState();
   const [products, setProducts] = useState();
+  const [errorMessage, setErrorMessage] = useState("");
+
   const token = localStorage.getItem("token");
   useEffect(() => {
     const fetchSkintype = async () => {

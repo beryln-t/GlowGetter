@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 export default function ({ products, user }) {
   const navigate = useNavigate();
   const [wishlist, setWishlist] = useState([]);
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     const fetchWishlist = async () => {
@@ -29,8 +30,13 @@ export default function ({ products, user }) {
 
   const addWishlist = async (productId) => {
     try {
-      setWishlist([...wishlist, { _id: productId }]);
-
+      if (isProductInWishlist(productId)) {
+        setErrorMessage("Product is already in wishlist.");
+        setTimeout(() => {
+          setErrorMessage("");
+        }, 2000);
+        return;
+      }
       const response = await fetch(
         `/api/members/${user._id}/wishlist/${productId}`,
         {
@@ -52,6 +58,9 @@ export default function ({ products, user }) {
     <div> No products available </div>
   ) : (
     <div className="flex flex-row flex-wrap max-w-custom gap-5 justify-start cursor-pointer ">
+      {errorMessage && (
+        <div className="alert alert-error shadow-lg">{errorMessage}</div>
+      )}
       {products.map((product) => (
         <div
           key={product._id}
